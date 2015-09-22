@@ -1,0 +1,27 @@
+﻿Build started 2015-09-22 오후 5:29:12.
+     1>Project "c:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\InteractKitchenHelper\InteractKitchenHelper.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt FrontImage.cpp Interface.cpp Main.cpp PlanManager.cpp
+         PlanManager.cpp
+         Main.cpp
+         Generating Code...
+         Compiling...
+         Interface.cpp
+         FrontImage.cpp
+         Generating Code...
+     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\interface.cpp(101): warning C4700: uninitialized local variable 'day' used
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.lib" /MACHINE:X86 Debug\DataBase.obj
+         Debug\Day.obj
+         Debug\FrontImage.obj
+         Debug\Ingredient.obj
+         Debug\Interface.obj
+         Debug\Main.obj
+         Debug\PlanManager.obj
+         Debug\Recipe.obj
+         InteractKitchenHelper.vcxproj -> c:\users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.exe
+     1>Done Building Project "c:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\InteractKitchenHelper\InteractKitchenHelper.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:08.55
