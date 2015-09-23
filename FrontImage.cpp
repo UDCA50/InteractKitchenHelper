@@ -1,9 +1,9 @@
 #include"Interface.h"
-
+#include<conio.h>
 
 void FrontImage::printImage(){
 
-	char garbageValue;
+	int garbageValue;
 	string line;
 	ifstream inFile("frontimage.txt", ios::in);
 
@@ -12,8 +12,9 @@ void FrontImage::printImage(){
 			system("Color 78");
 			cout << line << "\n";
 		}
+		
+		_getche();
 		inFile.close();
-		std::cin >> garbageValue;
 		system("cls");
 	}
 }
