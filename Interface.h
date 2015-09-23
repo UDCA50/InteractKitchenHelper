@@ -1,6 +1,6 @@
 #pragma once
 
-#include"DataBase.h"9
+#include"DataBase.h"
 #include"FrontImage .h"
 #include"PlanManager.h"
 
