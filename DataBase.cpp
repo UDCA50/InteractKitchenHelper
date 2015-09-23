@@ -50,7 +50,7 @@ void DataBase::dishResearch(vector<Recipe> tRecipe)
 	{
 		if (tRecipe[i].getDishName().find(name) != string::npos)
 		{
-			tempRecipe.push_back(recipe[i]);
+			tempRecipe.push_back(tRecipe[i]);
 		}
 	}
 
@@ -367,4 +367,16 @@ void DataBase::deleteRecipe(int recipeNumber)
 	recipe.erase(recipe.begin()+(recipeNumber-1));
 
 	return;
+}
+
+
+int DataBase::getRecipeCount(){
+
+	return recipe.size();
+}
+
+Recipe DataBase::getRecipebyIndex(int vectorIndex) {
+
+	return recipe.at(vectorIndex);
+
 }

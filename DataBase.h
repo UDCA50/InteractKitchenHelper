@@ -5,8 +5,6 @@ private:
 	vector<Recipe> recipe;		//실제 recipe벡터
 	vector<Recipe> tempRecipe;  //서치 과정을 통한 임시 벡터
 	
-
-
 	int showNeedToDishReasearch();               		// <1.재검색 2.수정 3.메인back 4. 일정추가>		
 														// "EnumDefinition.h"에 1,2,3,4정의를 하고
 
@@ -53,5 +51,8 @@ public:
 	Recipe showRecipeOfDish(string dishName);			//dishName를 매개변수로 받아서
 	//getRecipe();
 	Recipe getRecipe();*/ //연계기능
+
+	int getRecipeCount();
+	Recipe getRecipebyIndex(int vectorIndex);
 
 };

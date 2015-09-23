@@ -3,6 +3,7 @@
 #include<iostream>
 #include<ctime>
 using namespace std;
+// 반복문 iterator 전부 그럴듯한 이름으로 바꾸어야함
 
 
 Interface::Interface() {
@@ -208,6 +209,7 @@ void Interface::editDayPlan()
 
 void Interface::editDayPlan(const char* dishName){
 
+
 }
 
 void Interface::showTodayInformation(){
@@ -218,26 +220,39 @@ void Interface::showTodayInformation(){
 void Interface::loadFileData(DataBase &dataBase, PlanManager &planmanager){
 
 
-
 }
 
 void Interface::saveFileData(DataBase &dataBase, PlanManager &planmanager){
-	FILE* input;
-	input = fopen("DailyRecipe.txt", "w");
+
+	//한달 Day 정보를 파일에 저장함
+	FILE* datefptr;
+	datefptr = fopen("saveDayData.txt", "w");
 
 	int date = 1;
-	while (date > 30) {
-		fprintf(input, "%d일 식단 및 일정\n", date);
-		fprintf(input, "일정 : ");
-		planmanager.getDailyPlan(date);//<-객체 의 todayplan접근해야되는데 벡터라ㅠㅠ;
+	while (date < 32) {
+		Day saveDay;
+		saveDay = planmanager.getDailyPlan(date);		//오늘 Day 인스턴스 받아와서
+		char** savePlanData = saveDay.getTodayPlan();	// 오늘 Plan 들을 받아오고
+		
+		fprintf(datefptr, "%d,%s,%s,%s,%d,%d,%d", date, saveDay.getbreakFastName(),
+					saveDay.getLunchName(),saveDay.getdinnerName(),
+					saveDay.getbreakFastNumber(),saveDay.getLunchNumber(),saveDay.getDinnerNumber());
 
-		//fprintf(input, planmanager.getDailyPlan(date));
-		/*
-		for (i = 0; i < planmanager.getDailyPlan(date) .size(); i++) {
-		std::cout << todayPlan.at(i);
+		for (int i = 0; i < saveDay.getPlanCount(); i++) {
+			fprintf(datefptr, ",%s", savePlanData[i]);
 		}
-		*/
-
+		fprintf(datefptr, "\n");
+		delete[] savePlanData;
 		date++;
 	}
+	fclose(datefptr);
+// 현재 레서피 정보를 파일에 저장함 
+
+	FILE* recipefptr;
+	recipefptr = fopen("saveRecipeData.txt", "w");
+	for (int i = 0; i < dataBase.getRecipeCount(); i++) {
+		Recipe myRecipe = dataBase.getRecipebyIndex(i);
+		fprintf(recipefptr, "%s\n", myRecipe.getDishName());
+	}
+	fclose(recipefptr);
 }

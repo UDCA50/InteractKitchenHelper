@@ -5,6 +5,12 @@
 
 Day::Day(){
 
+	//testCase
+	todayPlan.push_back("오늘의일정1");
+	todayPlan.push_back("오늘의일정2");
+	todayPlan.push_back("오늘의일정3");
+	//testCase
+
 	strcpy_s(this->breakFastName, "아침없음");
 	strcpy_s(this->lunchName, "점심없음");
 	strcpy_s(this->dinnerName, "저녁없음");
@@ -54,7 +60,8 @@ void Day::editPlan(string newPlan)
 }
 
 
-string Day::getMenu(int num)
+string Day::getMenu
+(int num)
 {
 	if (num == 1)
 		return breakFastName;
@@ -62,4 +69,44 @@ string Day::getMenu(int num)
 		return breakFastName;
 	else if (num == 3)
 		return breakFastName;
+}
+
+
+
+char* Day::getbreakFastName(){
+
+	return breakFastName;
+}
+char* Day::getLunchName(){
+	return lunchName;
+}
+char* Day::getdinnerName(){
+	return dinnerName;
+}
+
+int Day::getbreakFastNumber(){
+	return breakFastNumber;
+}
+
+int Day::getLunchNumber(){
+	return lunchNumber;
+}
+int Day::getDinnerNumber(){
+	return dinnerNumber;
+}
+
+
+char** Day::getTodayPlan() {
+	char** charSet = new char*[todayPlan.size()];
+
+	for (int i = 0; i < todayPlan.size(); i++) {
+
+		charSet[i] = todayPlan.at(i);
+	}
+	return charSet;
+}
+
+int Day::getPlanCount() {
+
+	return todayPlan.size();
 }

@@ -29,6 +29,9 @@
     <ClCompile Include="PlanManager.cpp" />
     <ClCompile Include="Recipe.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="saveDayData.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2BAD122E-6C09-4986-B5E8-617644DE589F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
