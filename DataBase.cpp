@@ -24,6 +24,7 @@ int DataBase::showNeedToDishReasearch()
 {
 	int check;
 	cout << "*******메뉴선택*******" << endl;
+	// 현재 검색된 메뉴들의 내용을 보여주는 매서드가 필요하다
 	cout << "1. 검색결과 내에서 재검색" << endl;
 	cout << "2. 특정 레시피 수정" << endl;
 	cout << "3. 메인메뉴로 ..." << endl;
@@ -261,6 +262,8 @@ void DataBase::search()
 	}
 	}
 }
+
+
 
 void DataBase::dishSearch()
 {

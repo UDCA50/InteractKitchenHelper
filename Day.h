@@ -25,4 +25,5 @@ public:
 	void editName(int time, char *newName);		// 음식명 수정 메소드 (9/22)
 	void editNumber(int time, int newNum);		// 인원수 수정 메소드
 	void editPlan(string newPlan);				// 플랜 수정 메소드
+	string getMenu(int num);
 };

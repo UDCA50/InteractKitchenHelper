@@ -1,8 +1,9 @@
 #pragma once
 #include"Interface.h"
 #include<iostream>
-
+#include<ctime>
 using namespace std;
+
 
 Interface::Interface() {
 		//printTitleMenu();
@@ -85,15 +86,45 @@ void Interface::showFrontMenu(){
 void Interface::showDayPlan(){
 
 	int date;
-	std::cout << "확인할 날짜를 입력하세요 : ";
-	std::cin >> date;
+	int menunum = 0;
+	time_t timer;
+	struct tm *t;
 
-	while (date<1 || date>30) {
-		cout << "날짜를 잘못입력하셨습니다. 확인할 날짜를 입력하세요 : ";
-		std::cin >> date;
+	timer = time(NULL); // 현재 시각을 초 단위로 얻기
+	t = localtime(&timer); // 초 단위의 시간을 분리하여 구조체에 넣기
+
+	cout << "확인할 날짜를 입력하세요(" << t->tm_mon + 1 << "월/일) :";
+	cin >> date;
+
+	while ((date<1 || date>30)) {
+		cout << "유효한 일을 입력하세요(1일~31일) : ";
+		cin >> date;
 	}
-	
+
 	planmanager.showDailyPlan(date);
+	std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기  3.저녁메뉴 상세보기 " << std::endl << "확인할 메뉴에 해당하는 숫자를 입력하세요 : ";
+
+	std::cin >> menunum;
+	while (menunum <1 || menunum > 3) {
+		std::cout << "숫자를 잘못입력하셨습니다." << std::endl;
+		std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기  3.저녁메뉴 상세보기 " << std::endl << "확인할 메뉴에 해당하는 숫자를 입력하세요 : ";
+		std::cin >> menunum;
+	}
+
+	switch (menunum) {
+	case 1:
+		//showRecipeofdish(planmanager.getDailyPlan(date).getMenu);
+		break;
+
+	case 2:
+		break;
+
+	case 3:
+		break;
+
+	default:
+		break;
+	}
 
 }
 
@@ -101,62 +132,78 @@ void Interface::showDayPlan(){
 void Interface::editDayPlan()
 {
 	int day;
-	int menu;
-	Day myDay = planmanager.getDailyPlan(day);
+	int menu;	// 콘솔메뉴
+	Day myDay;
+	char *newMenu;	// 수정할 메뉴명
+	int newNumber;	// 수정할 인원수
+	string newPlan;	// 수정할 플랜
 
 	/* 1. 날짜 입력 */
 	while (1)
 	{
+		cout << "<< 일정/식단 수정 >>" << endl << "날짜를 입력하세요(1 ~ 31) : ";
 		cin >> day;
 
 		if (1 <= day && day <= 31)
 			break;
 		else
 			cout << "1에서 31 사이의 수만 입력하세요" << endl;
-	
 	}
+	myDay = planmanager.getDailyPlan(day);
+	myDay.showTodayData();
+
 
 	/* 2. 메뉴 */
 	while (1)
 	{
+		cout << endl << "1. 아침메뉴 수정하기" << endl 
+			<< "2. 점심메뉴 수정하기" << endl 
+			<< "3. 저녁메뉴 수정하기" << endl
+			<< "4. 일정추가하기" << endl 
+			<< "5. 일정삭제하기" << endl 
+			<< "6. 상위메뉴로" << endl;
+		fflush(stdin);
 
-		myDay.showTodayData();
-		cout << "1. 아침메뉴 수정하기" << endl << "2. 점심메뉴 수정하기" << endl << "3. 저녁메뉴 수정하기" << endl 
-			 << "4. 일정추가하기" << endl << "5. 일정삭제하기" << endl;
-	
 		cin >> menu;
 
-		if (menu == 1)
+		/* 메뉴수정파트 */
+		if (menu == 1 || menu == 2 || menu == 3)
 		{
-			//dataBase.dishSearch("");
-		}
-		else if (menu == 2)
-		{
-		
-		}
-		else if (menu == 3)
-		{
+			cout << " 1 > 메뉴명 수정" << endl;
+			dataBase.search();
+			myDay.editName(menu, newMenu);
 
+			cout << " 2 > 식사인원 수정 : ";
+			cin >> newNumber;
+			myDay.editNumber(menu, newNumber);
 		}
+
+		/* 일정수정파트 */
 		else if (menu == 4)
 		{
-
+			cout << " > 일정추가" << endl;
+			fflush(stdin);
+			cin >> newPlan;
+			myDay.editPlan(newPlan);
 		}
 		else if (menu == 5)
 		{
+			myDay.editPlan("");
+		}
 
+		/* 기타 */
+		else if (menu == 6)
+		{
+			showFrontMenu();
 		}
 		else
 		{
-
+			cout << "잘못된 입력입니다" << endl;
 		}
-	
-	
 	}
 
 
-	planmanager.changeDate(myDay, day);
-
+	//planmanager.changeDate(myDay, day);
 }
 
 void Interface::editDayPlan(const char* dishName){
@@ -174,8 +221,23 @@ void Interface::loadFileData(DataBase &dataBase, PlanManager &planmanager){
 
 }
 
-
 void Interface::saveFileData(DataBase &dataBase, PlanManager &planmanager){
+	FILE* input;
+	input = fopen("DailyRecipe.txt", "w");
 
+	int date = 1;
+	while (date > 30) {
+		fprintf(input, "%d일 식단 및 일정\n", date);
+		fprintf(input, "일정 : ");
+		planmanager.getDailyPlan(date);//<-객체 의 todayplan접근해야되는데 벡터라ㅠㅠ;
 
+		//fprintf(input, planmanager.getDailyPlan(date));
+		/*
+		for (i = 0; i < planmanager.getDailyPlan(date) .size(); i++) {
+		std::cout << todayPlan.at(i);
+		}
+		*/
+
+		date++;
+	}
 }
