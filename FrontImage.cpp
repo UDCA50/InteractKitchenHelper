@@ -13,7 +13,7 @@ void FrontImage::printImage(){
 			cout << line << "\n";
 		}
 		
-		_getche();
+		_getche();		//하나의 단어를 받는 함수
 		inFile.close();
 		system("cls");
 	}
