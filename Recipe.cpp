@@ -106,7 +106,7 @@ void Recipe::ingredientModify(int ingredientNumber)
 	case 1:
 	{	string modifyName;
 	cout << "변경할 재료명을 입력하세요. >>";
-	getline(cin, modifyName); //string 입력받기
+	cin >> modifyName;
 	setIngredientName(modifyName, ingredientNumber);
 	break;
 	}
@@ -151,7 +151,7 @@ void Recipe::showAllIngredient()
 	
 	for (int i = 0; i < ingredient.size(); i++)
 	{
-		cout << i << ". 재료명 : " << ingredient[i].getIngredientName() << endl;
+		cout << (i+1) << ". 재료명 : " << ingredient[i].getIngredientName() << endl;
 		cout << "   재료량 : " << ingredient[i].getAmount() << endl;
 	}
 

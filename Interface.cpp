@@ -2,6 +2,7 @@
 #include"Interface.h"
 #include<iostream>
 
+using namespace std;
 
 Interface::Interface() {
 		//printTitleMenu();
@@ -41,19 +42,19 @@ void Interface::showFrontMenu(){
 	switch (userInput)
 	{
 	case 1:
-		//레서피 검색 
+		dataBase.search();
 		break;
 	case 2:
-		// 레서피 추가
+		dataBase.addRecipe();
 		break;
 	case 3:
-		// 레서피 수정
+		dataBase.modifyRecipe();
 		break;
 	case 4:
-		// 레서피 삭제 
+		dataBase.deleteRecipe();
 		break;
 	case 5:
-		// 모든 레서피 종류 보기
+		dataBase.showAllRecipesList();
 		break;
 	case 6:
 		// 일정/식단 보기
