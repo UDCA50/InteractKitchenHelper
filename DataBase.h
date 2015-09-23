@@ -9,9 +9,6 @@ private:
 
 	int showNeedToDishReasearch();               		// <1.재검색 2.수정 3.메인back 4. 일정추가>		
 														// "EnumDefinition.h"에 1,2,3,4정의를 하고
-
-	void dishResearch(vector<Recipe> tRecipe);
-	void ingredientResearch(vector<Recipe> tRecipe);
 public:
 	DataBase();				//생성자
 
@@ -22,7 +19,6 @@ public:
 												//recipe[count].ingredientAdd(name, amount)!!<-반복
 												//조리법 추가 recipe[count].recipeOfDishAdd(recipeOfDish);
 
-	void modifyRecipe();
 	void modifyRecipe(vector<Recipe> recipes);				//레시피 수정
 										//모든 레시피 이름 출력 for문 showAllRecipes();
 										//몇번째 레시피인지 묻고
@@ -33,7 +29,6 @@ public:
 
 
 	//show 영역
-	void showAllRecipesList();
 	void showAllRecipesList(vector<Recipe> recipes);							//모든 레시피리스트 보여주기
 	
 
@@ -51,7 +46,7 @@ public:
 
 	/*
 	Recipe showRecipeOfDish(string dishName);			//dishName를 매개변수로 받아서
-	//getRecipe();
-	Recipe getRecipe();*/ //연계기능
+	//getRecipe();*/
+	vector<Recipe> getRecipe();
 
 };
