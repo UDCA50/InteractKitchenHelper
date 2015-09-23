@@ -252,7 +252,7 @@ void Interface::saveFileData(DataBase &dataBase, PlanManager &planmanager){
 	recipefptr = fopen("saveRecipeData.txt", "w");
 	for (int i = 0; i < dataBase.getRecipeCount(); i++) {
 		Recipe myRecipe = dataBase.getRecipebyIndex(i);
-		fprintf(recipefptr, "%s\n", myRecipe.getDishName());
+		fprintf(recipefptr, "%s\n", myRecipe.getDishName().c_str());
 	}
 	fclose(recipefptr);
 }
