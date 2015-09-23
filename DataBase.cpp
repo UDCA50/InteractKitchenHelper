@@ -1,6 +1,9 @@
 /*
 * Recipe Method 구현
 * Created by 신영현/남성준/최연호
+
+
+*  레서피 추가 ->
 */
 
 #pragma once
@@ -11,6 +14,9 @@ DataBase::DataBase()
 {
 	recipe.push_back(Recipe("밥"));
 	recipe[0].ingredientAdd("밥", 100);
+	recipe.push_back(Recipe("계란라면"));
+	recipe[1].ingredientAdd("계란", 100);
+
 }
 
 //private 영역
@@ -24,7 +30,8 @@ int DataBase::showNeedToDishReasearch()
 	cout << "**********************" << endl;
 	cout << " 선택 >> ";
 	cin >> check;
-	
+	cin.clear();
+	cin.ignore(10000, '\n');
 	return check;
 }
 void DataBase::dishResearch(vector<Recipe> tRecipe)
@@ -86,6 +93,8 @@ void DataBase::addRecipe()
 	cout << "<<레시피 추가를 시작합니다>>" << endl;
 	cout << "레시피명을 입력하세요. >> ";
 	cin >> recipeName;
+	cin.clear();
+	cin.ignore(10000, '\n');
 	//getline(cin, recipeName);
 	recipe.push_back(Recipe(recipeName));
 
@@ -96,6 +105,9 @@ void DataBase::addRecipe()
 		cout << "1.재료추가  2.아니요. 3.메인메뉴로..." << endl;
 		cout << "선택 >> ";
 		cin >> checkLoop;
+		cin.clear();
+		cin.ignore(10000, '\n');
+
 		if (checkLoop == 2)
 			break;
 		else if (checkLoop == 3)
@@ -106,8 +118,12 @@ void DataBase::addRecipe()
 			int ingredientAmount;
 			cout << "재료명을 입력하세요 >> ";
 			cin >> ingredientName;
+			cin.clear();
+			cin.ignore(10000, '\n');
 			cout << "재료량을 입력하세요 >> ";
 			cin >> ingredientAmount;
+			cin.clear();
+			cin.ignore(10000, '\n');
 			recipe[recipe.size() - 1].ingredientAdd(ingredientName, ingredientAmount);
 			cout << "***현재 재료목록***" << endl;
 			recipe[recipe.size() - 1].showAllIngredient();
@@ -120,10 +136,15 @@ void DataBase::addRecipe()
 	cout << "1.추가 2.메인 메뉴로..." << endl;
 	cout << "선택 >> ";
 	cin >> checkLoop;
+
+	cin.clear();
+	cin.ignore(10000, '\n');
 	if (checkLoop == 1) {
 		string recipeOfDish;
 		cout << "조리법을 입력하세요 >> ";
 		cin >> recipeOfDish;
+		cin.clear();
+		cin.ignore(10000, '\n');
 		recipe[recipe.size() - 1].setRecipeOfDish(recipeOfDish);
 	}
 	
@@ -209,11 +230,13 @@ void DataBase::showAllRecipesList(vector<Recipe> recipes)
 
 void DataBase::search()
 {
-	int choice;
+	int choice=0;
 	cout << "1.요리명으로 검색    2.재료명으로 검색    0.메인 메뉴로..." << endl;
 	cout << "선택 >> ";
 	cin >> choice;
-	
+	cin.clear();
+	cin.ignore(10000, '\n');
+
 	switch (choice)
 	{
 	case 1:

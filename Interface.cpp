@@ -37,7 +37,10 @@ void Interface::showFrontMenu(){
 	std::cout << "번호를 입력하세요 : ";
 
 	std::cin >> userInput;
+	cin.clear();
+	cin.ignore(10000, '\n');
 	std::cout << "your Input is " << userInput << std::endl;
+
 
 	switch (userInput)
 	{
@@ -167,9 +170,12 @@ void Interface::showTodayInformation(){
 
 void Interface::loadFileData(DataBase &dataBase, PlanManager &planmanager){
 
+
+
 }
 
 
 void Interface::saveFileData(DataBase &dataBase, PlanManager &planmanager){
+
 
 }
