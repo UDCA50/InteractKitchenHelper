@@ -17,13 +17,13 @@ Recipe::Recipe(string name)
 //private영역 Method
 
 int Recipe::findNumberOfIngredient(string name) {
-	int ingredientNum = 0;
+	
 	int i = 0;
 	int maxVectorNum;
 	maxVectorNum = ingredient.size();
 	for (i = 0; i<maxVectorNum; i++) {
-		if (ingredient[ingredientNum].getIngredientName().compare(name) == 0) {
-			return ingredientNum;
+		if (ingredient[i].getIngredientName().compare(name) == 0) {
+			return i;
 		}
 	}
 	return -1;	//-1이 return 될 경우 해당 레시피 상에 찾고자 하는 재료가 없다는 것을 의미
@@ -50,7 +50,7 @@ void Recipe::setIngredientAmount(int amount,int ingredientNumber)
 	ingredient[ingredientNumber].setAmount(amount);
 }
 
-void Recipe::ingredientDelete(int ingredientNumber)
+void Recipe::deleteIngredient(int ingredientNumber)
 {
 	ingredient.erase(ingredient.begin() + (ingredientNumber-1));
 }	//재료 요소 삭제
@@ -72,13 +72,13 @@ vector<Ingredient> Recipe::getIngredient()
 	return ingredient;
 }
 
-string Recipe::getRecipedOfDish()
+string Recipe::getRecipeOfDish()
 {
-	return recipeOfDish;
+	return dishExplanation;
 }
 
 
-void Recipe::ingredientAdd(string name, int amount)
+void Recipe::addIngredient(string name, int amount)
 {
 	ingredient.push_back(Ingredient(name, amount));
 	
@@ -89,12 +89,12 @@ void Recipe::setDishName(string name)
 	this->dishName = name;
 }
 
-void Recipe::setRecipeOfDish(string recipeOfDish)
+void Recipe::setdishExplanation(string dishExplanation)
 {
-	this->recipeOfDish = recipeOfDish;
+	this->dishExplanation = dishExplanation;
 }
 
-void Recipe::ingredientModify(int ingredientNumber)
+void Recipe::modifyIngredient(int ingredientNumber)
 {
 	int modifyChoice=0;
 	cout << "1. 재료명 수정\n2.재료량 수정\n3.이 재료 삭제\n0.메인메뉴로..." << endl;
@@ -120,7 +120,7 @@ void Recipe::ingredientModify(int ingredientNumber)
 	}
 	case 3:
 	{
-		ingredientDelete(ingredientNumber);
+		deleteIngredient(ingredientNumber);
 		break;
 	}
 	case 0:
@@ -143,7 +143,7 @@ void Recipe::showAllRecipeInformation()
 	for (int i = 0; i < ingredient.size(); i++)
 		showIngredient(i);
 	cout << "******************" << endl;
-	cout << "조리법 : " << recipeOfDish;
+	cout << "조리법 : " << dishExplanation;
 }
 
 void Recipe::showAllIngredient()

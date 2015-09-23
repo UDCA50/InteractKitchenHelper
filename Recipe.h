@@ -10,43 +10,36 @@
 class Recipe{
 
 private:
-	string dishName;									//요리명
+	string dishName;								//요리명
 	vector<Ingredient> ingredient;					//재료
-	string  recipeOfDish;							//요리조리법
+	string  dishExplanation;						//조리법
 	
-	int findNumberOfIngredient(string name);			//현재 재료의 번호를 반환. (몇번째 재료인지) 
-													//매개변수 재료명
+	int findNumberOfIngredient(string name);		//현재 재료의 번호를 반환. (몇번째인지) 
 	
-	string getIngredientName(int ingredientNumber);							//몇번째 재료의 재료명을 반환
-	void setIngredientName(string name, int ingredientNumber);				//재료명 수정
-																			//재료명을 매개변수로 얻어서 ingredientName 수정
-																			//setName()
-	int getIngredientAmount(int ingredientNumber);							//몇번째 재료의 재료량을 반환.
-	void setIngredientAmount(int amount,int ingredientNumber);			//현재 재료의 재료량을 설정(수정)
-										//몇번째 조리법을 반환.
+	void setIngredientName(string name, int ingredientNumber);		//재료명 수정		
+	void setIngredientAmount(int amount, int ingredientNumber);			//재료량 설정
 
-	void ingredientDelete(int ingredientNumber); 	//재료 삭제
+	int getIngredientAmount(int ingredientNumber);		 //재료량 반환.
+	string getIngredientName(int ingredientNumber);		// 재료이름 반환 
 
-	void showIngredient(int ingredientNumber);		//몇번째 재료정보를 보여주기 ->getIngredientName/getIngredientAmount 이용
+	void deleteIngredient(int ingredientNumber); 	//재료 삭제
+	void showIngredient(int ingredientNumber);		//재료정보를 보여주기
 
 public:
-	Recipe(string name);				//생성자
-									//요리명을 입력받음
-	string getRecipedOfDish();
+	Recipe(string name);			
 
-	//gt영역
+	//getter
 	string getDishName();			//요리명 얻기 ->list 출력에 필요
+	string getRecipeOfDish();
 	vector<Ingredient> getIngredient();
-	//set영역
-	void ingredientAdd(string name, int amount);		//재료 추가
-													//이름 ,양 set 이때 ingredientCount++;
-	void setDishName(string name);					//요리의 이름을 입력(수정)
-	void ingredientModify(int ingredientNumber);	//재료 수정/삭제
-													//재료의 번수를 매개변수로 받아서
-													//재료명 변경->setIngredientName, 양->setIngredientAmount
-	void setRecipeOfDish(string recipeOfDish);
 
+	//setter
+	void setDishName(string name);						//요리명변경
+	void setdishExplanation(string dishExplanation);	//조리법 변경
+	void addIngredient(string name, int amount);		//재료 추가
+	void modifyIngredient(int ingredientNumber);	//재료 수정/삭제
+	
 	//show영역
-	void showAllRecipeInformation();	//dishName출력, for문으로 재료명/량 모두출력, recipeOfDish출력
+	void showAllRecipeInformation();	//레서피 모든 정보 출력
 	void showAllIngredient();		//한 레시피의 모든 재료들 출력하기. 
 };

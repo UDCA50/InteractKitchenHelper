@@ -1,58 +1,38 @@
+#pragma once
 #include "Recipe.h"
 
 class DataBase{
 private:
-	vector<Recipe> recipe;		//실제 recipe벡터
-	vector<Recipe> tempRecipe;  //서치 과정을 통한 임시 벡터
+	vector<Recipe> recipeList;		// 여러 레서피 정보를 저장한 DB
+	vector<Recipe> tempRecipeList;  // 검색된 레서피 정보를 임시저장하는 DB
 	
-	int showNeedToDishReasearch();               		// <1.재검색 2.수정 3.메인back 4. 일정추가>		
-														// "EnumDefinition.h"에 1,2,3,4정의를 하고
+	void searchRecipebyName();      			//이름으로 레서피 검색 매소드
+	void searchRecipebyIngre(); 			//재료로 레서피 검색
+	void deleteRecipe(int recipeNumber);	//특정 레서피를 삭제
 
-	void dishResearch(vector<Recipe> tRecipe);
-	void ingredientResearch(vector<Recipe> tRecipe);
+	int selectSearchOption();   //레서피검색후 추가동작을 입력받는 매소드
+
+	void researchDish(vector<Recipe> tRecipe);	//요리명을 재검색하는 매소드
+	void researchIngredient(vector<Recipe> tRecipe);	//재료를 재검색하는 매소드
+	
+	int findRecipeNumber(string recipeName);		//해당이름의 레서피를 검색하는 매소드
+
+	
 public:
-	DataBase();				//생성자
+	DataBase();	
 
 	//set영역
-	void addRecipe();							//레시피 추가 영역
-												//이름을 입력받아서 recipe[num].setDishName(name);
-												//재료를 추가할것인지의 여부를 물어본뒤 추가하면
-												//recipe[count].ingredientAdd(name, amount)!!<-반복
-												//조리법 추가 recipe[count].recipeOfDishAdd(recipeOfDish);
+	void addRecipe();							//레시피 추가
+	void modifyRecipe();						//레서피 수정
+	void modifyRecipe(vector<Recipe> recipes);	//레시피 수정
+	void searchRecipe();						//레서피를 검색함
+	void deleteRecipe();						//레서피를 삭제함
 
-	void modifyRecipe();
-	void modifyRecipe(vector<Recipe> recipes);				//레시피 수정
-										//모든 레시피 이름 출력 for문 showAllRecipes();
-										//몇번째 레시피인지 묻고
-										//이름 수정-> recipe[num].setDishName(name)
-										//재료 수정-> 몇번째 재료인지 묻고
-										//recipe[num].IngredientModify(ingredientnumber);
-										//조리법 수정-> recipe[num].setRecipeOfDish(recipeOfDish);
+	void selectOneRecipe(vector<Recipe> tRecipe);	//자세히 볼 레서피 1개 선택하기
+	void showRecipeOfDish(string dishName);			//특정 레서피 상세보기
+	void showAllRecipeList();						//레서피리스트 보기
+	void showAllRecipeList(vector<Recipe> recipes);	//레서피리스트 보기(temp 리스트 안에서)
 
-
-	//show 영역
-	void showAllRecipesList();
-	void showAllRecipesList(vector<Recipe> recipes);							//모든 레시피리스트 보여주기
-	
-
-	//실질적 method영역
-	void search();	//서치 ->dish/ingredient
-	
-	void dishSearch();      			//서치 후 showNeedToReaserch();
-													
-	void ingredientSearch(); 			//서치 후 showNeedToReasearch();
-
-	void deleteRecipe();
-
-	void deleteRecipe(int recipeNumber);			//레시피 삭제
-
-
-	/*
-	Recipe showRecipeOfDish(string dishName);			//dishName를 매개변수로 받아서
-	//getRecipe();
-	Recipe getRecipe();*/ //연계기능
-
-	int getRecipeCount();
-	Recipe getRecipebyIndex(int vectorIndex);
-
+	string selectOneRecipeName();				//하나의 레서피 선택해 이름반환
+	void saveDataBase();					//현재 레서피를 파일에 저장함
 };

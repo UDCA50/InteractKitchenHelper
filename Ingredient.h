@@ -14,12 +14,13 @@ private:
 	string ingredientName;					//재료명
 	int amount;								//재료량
 public:
-	Ingredient(string name, int amount);		//생성자
-											//재료를 입력받을 때, 이름과 양을 입력받음
-	string getIngredientName();				//재료명을 반환함
-	int getAmount();						//재료량을 반환함
+	Ingredient(string name, int amount);			
 
-	void setName(string name);							//재료명을 setting(수정 시)
-	void setAmount(int amount);						//재료량을 setting(수정 시)
+	//getter
+	string getIngredientName();				
+	int getAmount();					
+	//setter
+	void setName(string name);							
+	void setAmount(int amount);					
 
 };

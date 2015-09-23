@@ -3,17 +3,11 @@
 #include<iostream>
 
 
-Day::Day(){
+Day::Day() {
 
-	//testCase
-	todayPlan.push_back("오늘의일정1");
-	todayPlan.push_back("오늘의일정2");
-	todayPlan.push_back("오늘의일정3");
-	//testCase
-
-	strcpy_s(this->breakFastName, "아침없음");
-	strcpy_s(this->lunchName, "점심없음");
-	strcpy_s(this->dinnerName, "저녁없음");
+	this->breakFastName = "아침없음";
+	this->lunchName = "점심없음";
+	this->dinnerName = "저녁없음";
 
 	this->breakFastNumber = 1;
 	this->lunchNumber = 1;
@@ -21,12 +15,13 @@ Day::Day(){
 
 }
 
-void Day::showTodayData(){
+void Day::showTodayData() {
 	int number;
 	int i;
+	//system("cls");
 	std::cout << "일정 : ";
 	for (i = 0; i < todayPlan.size(); i++) {
-		std::cout << todayPlan.at(i);
+		std::cout << endl << i + 1 << "번째 일정 : " << todayPlan.at(i);
 	}
 	std::cout << std::endl;
 	std::cout << "아침 메뉴 : " << breakFastName << std::endl;
@@ -34,14 +29,14 @@ void Day::showTodayData(){
 	std::cout << "저녁 메뉴 : " << dinnerName << std::endl;
 
 }
-void Day::editName(int time, char *newName)
+void Day::setMealName(int time, string newName)
 {
 	if (time == 1)		// 아침
-		strcpy_s(this->breakFastName, newName);
+		this->breakFastName = newName;
 	else if (time == 2) // 점심
-		strcpy_s(this->lunchName, newName);
+		this->lunchName = newName;
 	else if (time == 3) // 저녁
-		strcpy_s(this->dinnerName, newName);
+		this->dinnerName = newName;
 }
 
 void Day::editNumber(int time, int newNumber)
@@ -54,50 +49,39 @@ void Day::editNumber(int time, int newNumber)
 		this->dinnerNumber = newNumber;
 }
 
-void Day::editPlan(string newPlan)
+void Day::addPlan(string newPlan)
 {
-	//todayPlan.assign(newPlan.c_str());
+	todayPlan.push_back(newPlan.c_str());
+}
+
+void Day::deleteAllPlan()
+{
+	todayPlan.clear();
 }
 
 
-string Day::getMenu
-(int num)
+string Day::getMealName(int num)
 {
 	if (num == 1)
 		return breakFastName;
 	else if (num == 2)
-		return breakFastName;
+		return lunchName;
 	else if (num == 3)
-		return breakFastName;
+		return dinnerName;
 }
 
-
-
-char* Day::getbreakFastName(){
-
-	return breakFastName;
-}
-char* Day::getLunchName(){
-	return lunchName;
-}
-char* Day::getdinnerName(){
-	return dinnerName;
+int Day::getMealNumber(int num)
+{
+	if (num == 1)
+		return breakFastNumber;
+	else if (num == 2)
+		return lunchNumber;
+	else if (num == 3)
+		return dinnerNumber;
 }
 
-int Day::getbreakFastNumber(){
-	return breakFastNumber;
-}
-
-int Day::getLunchNumber(){
-	return lunchNumber;
-}
-int Day::getDinnerNumber(){
-	return dinnerNumber;
-}
-
-
-char** Day::getTodayPlan() {
-	char** charSet = new char*[todayPlan.size()];
+string* Day::getAllPlan() {
+	string* charSet = new string[todayPlan.size()];
 
 	for (int i = 0; i < todayPlan.size(); i++) {
 
@@ -107,6 +91,5 @@ char** Day::getTodayPlan() {
 }
 
 int Day::getPlanCount() {
-
 	return todayPlan.size();
 }

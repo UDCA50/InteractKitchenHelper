@@ -3,16 +3,12 @@
 #include<fstream>
 #include<string>
 #include<Windows.h>
-using std::ofstream;
-
-const int ImageMaxSize = 60;
+#include<conio.h>
 
 class FrontImage{
 
 private:
 
 public:
-
-	void printImage(); //frontImage 출력하는 메소드
-	void sayHellowToUser();		// 유저에게 인사말을 건네는 클래스
+	void printImage();			//실행화면을 출력하는 메소드
 };

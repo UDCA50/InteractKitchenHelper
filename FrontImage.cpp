@@ -1,5 +1,6 @@
 #include"Interface.h"
-#include<conio.h>
+
+using std::ofstream;
 
 void FrontImage::printImage(){
 
@@ -12,7 +13,6 @@ void FrontImage::printImage(){
 			system("Color 78");
 			cout << line << "\n";
 		}
-		
 		_getche();		//하나의 단어를 받는 함수
 		inFile.close();
 		system("cls");
