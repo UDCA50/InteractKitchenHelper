@@ -65,5 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="saveDayData.txt" />
+    <Text Include="saveRecipeData.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
