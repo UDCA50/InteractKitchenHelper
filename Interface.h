@@ -1,6 +1,6 @@
 #pragma once
 
-#include"DataBase.h"
+#include"DataBase.h"9
 #include"FrontImage .h"
 #include"PlanManager.h"
 
@@ -11,6 +11,7 @@ private:
 	FrontImage frontImage;		//처음 이미지를 출력하는 클래스
 	DataBase dataBase;			// 레서피정보를 담고있는 클래스
 	PlanManager planmanager;		// 전체 일정 정보를 담고있는 클래스
+
 
 	void showTodayInformation();	//오늘의 계획(일정,식단)을 보여주는 클래스
 	void showDayPlan();		// 특정날짜의 계획을 보여주는 매소드
