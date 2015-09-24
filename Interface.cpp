@@ -41,7 +41,7 @@ void Interface::showFrontMenu() {
 	std::cin >> userInput;
 	cin.clear();
 	cin.ignore(10000, '\n');
-	std::cout << "your Input is " << userInput << std::endl;
+	std::cout << std::endl;
 
 
 	switch (userInput)
@@ -86,7 +86,7 @@ void Interface::showFrontMenu() {
 
 void Interface::showDayPlan() {
 
-	int date, menunum;
+	int date, menunum = 0;
 	std::cout << "확인할 날짜를 입력하세요(1~30) : ";
 	std::cin >> date;
 
@@ -97,49 +97,64 @@ void Interface::showDayPlan() {
 
 	planmanager.showDailyPlan(date);
 
-	std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기  3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기 " << std::endl << "확인할 메뉴에 해당하는 숫자를 입력하세요 : ";
-	std::cin >> menunum;
+	while (menunum != 4) {
+		std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" << std::endl << "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기 " << std::endl << "해당하는 숫자를 입력하세요 : ";
+		std::cin >> menunum;
 
-	if (menunum == 4)
-		showFrontMenu();
+		if (menunum == 4)
+			showFrontMenu();
 
-	else {
-		while (menunum <1 || menunum > 3) {
-			if (menunum == 4){
-				showFrontMenu();
+		else {
+			while (menunum <1 || menunum > 3) {
+				if (menunum == 4){
+					showFrontMenu();
+				}
+				else {
+					std::cout << "숫자를 잘못입력하셨습니다." << std::endl;
+					std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" <<std::endl<< "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기" << std::endl << "해당하는 숫자를 입력하세요 : ";
+					std::cin >> menunum;
+				}
+
+			}
+		}
+
+		switch (menunum) {
+		case 1:
+			if (planmanager.getOneDay(date).getMealName(1).compare("아침없음") == 0) {
+				std::cout << "확인할 메뉴가 없습니다." << std::endl;
+
 			}
 			else {
-				std::cout << "숫자를 잘못입력하셨습니다." << std::endl;
-				std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기  3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기" << std::endl << "확인할 메뉴에 해당하는 숫자를 입력하세요 : ";
-				std::cin >> menunum;
+				std::cout << planmanager.getOneDay(date).getMealNumber(1) << "명분의 요리를 해야합니다." << std::endl;
+				dataBase.showRecipeOfDish(planmanager.getOneDay(date).getMealName(1));
 			}
+			break;
+
+		case 2:
+			if (planmanager.getOneDay(date).getMealName(2).compare("점심없음") == 0) {
+				std::cout << "확인할 메뉴가 없습니다." << std::endl;
+			}
+			else{
+				std::cout << planmanager.getOneDay(date).getMealNumber(2) << "명분의 요리를 해야합니다." << std::endl;
+				dataBase.showRecipeOfDish(planmanager.getOneDay(date).getMealName(2));
+			}
+			break;
+
+		case 3:
+			if (planmanager.getOneDay(date).getMealName(3).compare("저녁없음") == 0) {
+				std::cout << "확인할 메뉴가 없습니다." << std::endl;
+			}
+			else{
+				std::cout << planmanager.getOneDay(date).getMealNumber(3) << "명분의 요리를 해야합니다." << std::endl;
+				dataBase.showRecipeOfDish(planmanager.getOneDay(date).getMealName(3));
+			}
+			break;
+
+		default:
+			break;
 		}
+
 	}
-	switch (menunum) {
-		//showRecipeofdish(planmanager.getOneDay(date).getMealName(숫자)); -> 사용해야됨!!!!
-		//planmanager.getOneDay(date).getMealNumber(숫자) -> 인원수!!!
-	case 1:
-		if (planmanager.getOneDay(date).getMealName(1).compare("아침없음") == 0) {
-			std::cout << "확인할 메뉴가 없습니다." << std::endl;
-		}
-		break;
-
-	case 2:
-		if (planmanager.getOneDay(date).getMealName(2).compare("점심없음") == 0) {
-			std::cout << "확인할 메뉴가 없습니다." << std::endl;
-		}
-		break;
-
-	case 3:
-		if (planmanager.getOneDay(date).getMealName(3).compare("저녁없음") == 0) {
-			std::cout << "확인할 메뉴가 없습니다." << std::endl;
-		}
-		break;
-
-	default:
-		break;
-	}
-
 }
 
 
@@ -164,6 +179,7 @@ void Interface::editDayPlan()
 			cout << "1에서 31 사이의 수만 입력하세요" << endl;
 	}
 	myDay = planmanager.getOneDay(day);
+	std::cout << day << "일 ";
 	myDay.showTodayData();
 
 

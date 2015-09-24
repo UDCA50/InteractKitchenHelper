@@ -114,6 +114,7 @@ void DataBase::addRecipe()
 	cin.ignore(10000, '\n');
 	//getline(cin, recipeName);
 	recipeList.push_back(Recipe(recipeName));
+	cout << endl;
 
 	while (1)
 	{
@@ -123,6 +124,8 @@ void DataBase::addRecipe()
 		cin >> checkLoop;
 		cin.clear();
 		cin.ignore(10000, '\n');
+
+		cout << endl;
 
 		if (checkLoop == 2)
 			break;
@@ -155,6 +158,7 @@ void DataBase::addRecipe()
 	cin.clear();
 	cin.ignore(10000, '\n');
 
+	cout << endl;
 
 	if (checkLoop == 1) {
 		string dishExplanation;
@@ -163,6 +167,8 @@ void DataBase::addRecipe()
 		cin.clear();
 		cin.ignore(10000, '\n');
 		recipeList[recipeList.size() - 1].setdishExplanation(dishExplanation);
+
+		cout << endl;
 	}
 	
 	return;
@@ -182,6 +188,8 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 	cout << "******************" << endl;
 	cout << "어느 레시피를 수정하시겠습니까? (0: 메인메뉴)" << endl;
 	cout << "선택 >> "; cin >> choiceDish;
+
+	cout << endl;
 
 	if (choiceDish == 0) {
 		tempRecipeList.clear();
@@ -208,7 +216,7 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 			}
 		}
 
-		cout << "요리명 변경이 완료되었습니다." << endl;
+		cout << "요리명 변경이 완료되었습니다." << endl << endl;
 		break;
 	}
 	case 2:
@@ -372,8 +380,12 @@ void DataBase::deleteRecipe()
 	cout << "****레시피 삭제****" << endl;
 	showAllRecipeList(recipeList);
 	cout << "삭제하실 레시피를 선택하세요 (0: 메인메뉴로...)";
+	cout << endl;
 	cout << " 선택 >> ";
 	cin >> choice;
+
+	cout << endl;
+
 	if (choice == 0)
 		return;
 	else deleteRecipe(choice);
@@ -392,7 +404,7 @@ void DataBase::selectOneRecipe(vector<Recipe> tRecipe)
 {
 	int choice;
 	
-	cout << "선택 >> ";
+	cout << "메뉴 선택 >> ";
 	cin >> choice;
 
 	showRecipeOfDish(tRecipe[choice-1].getDishName());
@@ -425,23 +437,30 @@ void DataBase::showAllRecipeList()
 	cout << "1.특정 레시피 보기 " << endl;
 	cout << "2. 메인 메뉴로 ..." << endl;
 	cout << "*********************" << endl;
-	cout << " 선택 >> ";
+	cout << "선택 >> ";
 	cin >> choice;
 	if (choice == 1) selectOneRecipe(recipeList);
 	else return;
 	
 }
+
+void DataBase::showAllRecipeListForInterface()
+{
+	for (int i = 0; i < recipeList.size(); i++)
+		cout << (i + 1) << ". " << recipeList[i].getDishName() << endl;
+}
+
 void DataBase::showAllRecipeList(vector<Recipe> recipes)
 {
 	for (int i = 0; i < recipes.size(); i++)
-		cout << (i + 1) << ". : " << recipes[i].getDishName() << endl;
+		cout << (i + 1) << ". " << recipes[i].getDishName() << endl;
 }
 
 string DataBase::selectOneRecipeName() //요리 이름 반환method
 {
 	string forChangeMenu;
 	int getNum = 0;
-	showAllRecipeList();
+	showAllRecipeListForInterface();
 	for (;;) {
 		cout << "Menu 선택 >> ";
 		cin >> getNum;

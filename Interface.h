@@ -12,6 +12,7 @@ private:
 	DataBase dataBase;			// 레서피정보
 	PlanManager planmanager;	// 전체 일정 정보
 
+
 	void showTodayInformation();	//오늘의 계획(일정,식단)을 보여주는 클래스
 	void showDayPlan();		// 특정날짜의 계획을 보여주는 매소드
 
