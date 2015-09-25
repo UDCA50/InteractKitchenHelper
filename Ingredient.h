@@ -15,7 +15,7 @@ private:
 	int amount;								//Àç·á·®
 public:
 	Ingredient(string name, int amount);			
-
+	Ingredient();
 	//getter
 	string getIngredientName();				
 	int getAmount();					

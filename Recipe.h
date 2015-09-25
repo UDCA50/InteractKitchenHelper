@@ -26,7 +26,8 @@ private:
 	void showIngredient(int ingredientNumber);		//재료정보를 보여주기
 
 public:
-	Recipe(string name);			
+	Recipe(string name);	
+	Recipe();
 
 	//getter
 	string getDishName();			//요리명 얻기 ->list 출력에 필요
@@ -38,7 +39,8 @@ public:
 	void setdishExplanation(string dishExplanation);	//조리법 변경
 	void addIngredient(string name, int amount);		//재료 추가
 	void modifyIngredient(int ingredientNumber);	//재료 수정/삭제
-	
+
+	void setFileIngredient(Ingredient addIngredient);//09-24새로만듬
 	//show영역
 	void showAllRecipeInformation();	//레서피 모든 정보 출력
 	void showAllIngredient();		//한 레시피의 모든 재료들 출력하기. 

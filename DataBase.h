@@ -32,8 +32,12 @@ public:
 	void showRecipeOfDish(string dishName);			//특정 레서피 상세보기
 	void showAllRecipeList();						//레서피리스트 보기
 	void showAllRecipeList(vector<Recipe> recipes);	//레서피리스트 보기(temp 리스트 안에서)
-	void showAllRecipeListForInterface();
 
 	string selectOneRecipeName();				//하나의 레서피 선택해 이름반환
 	void saveDataBase();					//현재 레서피를 파일에 저장함
+
+	
+	void setRecipeList(); //Interface에서 recipeList에 접근하기 위한 함수 .... 이걸 어떻게 만들까
+
+	void setRecipe(Recipe myrecipe);
 };

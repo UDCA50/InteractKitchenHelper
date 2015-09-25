@@ -24,5 +24,6 @@ private:
 public:
 	Interface();
 	void showFrontMenu();	// 처음메뉴
-
+	void loadDayData(PlanManager &planmanager); //09.25 DayData 받기 위한 함수
+	void loadRecipeData(DataBase &dataBase); // 09.25 RecipeData 받기 위한 함수
 };

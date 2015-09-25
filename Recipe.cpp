@@ -12,6 +12,9 @@ Recipe::Recipe(string name)
 	this->dishName = name;
 }
 
+Recipe::Recipe(){
+
+}
 
 
 //private영역 Method
@@ -48,6 +51,11 @@ int Recipe::getIngredientAmount(int ingredientNumber) {
 void Recipe::setIngredientAmount(int amount,int ingredientNumber)
 {
 	ingredient[ingredientNumber].setAmount(amount);
+}
+
+void Recipe::setFileIngredient(Ingredient addIngredient) //interface에서 Ingredient에 재료명, 수량 전달위해 만든 method 09-24
+{
+	ingredient.push_back(addIngredient);
 }
 
 void Recipe::deleteIngredient(int ingredientNumber)

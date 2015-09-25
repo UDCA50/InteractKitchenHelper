@@ -10,6 +10,11 @@ Ingredient::Ingredient(string name, int amount)
 	this->amount = amount;
 }
 
+Ingredient::Ingredient()
+{
+}
+
+
 string Ingredient::getIngredientName()	//재료명 반환
 {
 	return ingredientName;
@@ -29,3 +34,5 @@ void Ingredient::setAmount(int amount)
 {
 	this->amount = amount;
 }
+
+

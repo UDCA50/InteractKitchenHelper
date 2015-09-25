@@ -1,42 +1,9 @@
-﻿Build started 2015-09-24 오전 1:21:34.
+﻿Build started 2015-09-26 오전 1:38:16.
      1>Project "C:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\InteractKitchenHelper\InteractKitchenHelper.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt DataBase.cpp FrontImage.cpp Ingredient.cpp Interface.cpp Main.cpp Recipe.cpp
-         FrontImage.cpp
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\frontimage.cpp(7): warning C4101: 'garbageValue' : unreferenced local variable
-         DataBase.cpp
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(51): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(73): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(75): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(203): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(228): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(292): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(335): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(337): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(418): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(436): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(464): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 d:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(211) : see declaration of 'fopen'
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(465): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\lenovo\documents\visual studio 2013\projects\interactkitchenhelper\interactkitchenhelper\database.cpp(471): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         Recipe.cpp
-         Main.cpp
-         Interface.cpp
-         Ingredient.cpp
-       Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.lib" /MACHINE:X86 Debug\DataBase.obj
-         Debug\Day.obj
-         Debug\FrontImage.obj
-         Debug\Ingredient.obj
-         Debug\Interface.obj
-         Debug\Main.obj
-         Debug\PlanManager.obj
-         Debug\Recipe.obj
+     1>Link:
          InteractKitchenHelper.vcxproj -> C:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\Debug\InteractKitchenHelper.exe
      1>Done Building Project "C:\Users\lenovo\documents\visual studio 2013\Projects\InteractKitchenHelper\InteractKitchenHelper\InteractKitchenHelper.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.90
+Time Elapsed 00:00:00.18

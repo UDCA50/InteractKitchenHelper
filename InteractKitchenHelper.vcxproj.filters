@@ -64,8 +64,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="saveDayData.txt" />
     <Text Include="saveRecipeData.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="saveDayData.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

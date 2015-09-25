@@ -7,7 +7,7 @@ using namespace std;
 
 Interface::Interface() {
 	
-	//loadFileData(dataBase, planmanager);
+	loadFileData(dataBase, planmanager);
 	frontImage.printImage();		// 초기화면 출력
 	showTodayInformation();
 }
@@ -41,7 +41,7 @@ void Interface::showFrontMenu() {
 	std::cin >> userInput;
 	cin.clear();
 	cin.ignore(10000, '\n');
-	std::cout << std::endl;
+	std::cout << "your Input is " << userInput << std::endl;
 
 
 	switch (userInput)
@@ -95,11 +95,16 @@ void Interface::showDayPlan() {
 		std::cin >> date;
 	}
 
+	std::cout << std::endl;
+
+	std::cout << date << "일 ";
 	planmanager.showDailyPlan(date);
 
 	while (menunum != 4) {
 		std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" << std::endl << "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기 " << std::endl << "해당하는 숫자를 입력하세요 : ";
 		std::cin >> menunum;
+
+		std::cout << std::endl;
 
 		if (menunum == 4)
 			showFrontMenu();
@@ -111,8 +116,9 @@ void Interface::showDayPlan() {
 				}
 				else {
 					std::cout << "숫자를 잘못입력하셨습니다." << std::endl;
-					std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" <<std::endl<< "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기" << std::endl << "해당하는 숫자를 입력하세요 : ";
+					std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" << std::endl << "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기" << std::endl << "해당하는 숫자를 입력하세요 : ";
 					std::cin >> menunum;
+					std::cout << std::endl;
 				}
 
 			}
@@ -179,8 +185,7 @@ void Interface::editDayPlan()
 			cout << "1에서 31 사이의 수만 입력하세요" << endl;
 	}
 	myDay = planmanager.getOneDay(day);
-	std::cout << day << "일 ";
-	myDay.showTodayData();
+	myDay.showTodayData(day);
 
 
 	/* 2. 메뉴 */
@@ -242,69 +247,9 @@ void Interface::showTodayInformation() {
 }
 
 void Interface::loadFileData(DataBase &dataBase, PlanManager &planmanager){
-   //한달 Day 정보를 프로그램에 불러옴
-   Day loadDay;
-   FILE* datefptr;
-   datefptr = fopen("saveDayData.txt", "r");
-
-   int date = 1;
-   while (date < 32) {
-      ifstream ifp(datefptr);
-      char line[128];
-      int count = 0;
-      char* context = NULL;
-      while (fgets(line, 128, datefptr) != NULL){
-
-         cout << line << endl;
-         char* token = strtok_s(line, ",", &context);
-         if (token != NULL){//Number
-         //★/  loadDay.editNumber = token - 48; //맨 앞은 숫자이기 때문에 -48해줌
-		// editNumber(int time, int newNumber) 는 함수인데
-		// 처음에 받는 숫자는 몇일에 이걸 넣을지 인데 어떤식으로 쓰겠다는건지 
-		// 수정필요함
-         }
-         while (token){
-            count++;
-            token = strtok_s(NULL, ",", &context);
-            if (count == 1){//아침메뉴
-
-
-            }
-            else if (count == 2){//점심메뉴
-
-            }
-            else if (count == 3){//저녁메뉴
-
-            }
-            else if (count == 4){//아침 인원 수
-
-
-            }
-            else if (count == 5){//점심 인원 수
-
-
-            }
-            else if (count == 6){//저녁 인원 수
-
-            }
-            else if (count == 7){//오늘일정1
-
-            }
-            else if (count == 8){//오늘일정2
-
-            }
-            else if (count == 9){//오늘일정3
-
-               count = 0;
-               break;
-            }
-         }
-      } //한줄씩 읽으면서 파싱
-
-
-   }
-
-      fclose(datefptr);
+	//한달 Day 정보를 프로그램에 불러옴
+	loadDayData(planmanager);
+	loadRecipeData(dataBase);
 
 }
 
@@ -312,6 +257,88 @@ void Interface::loadFileData(DataBase &dataBase, PlanManager &planmanager){
 void Interface::saveFileData(DataBase &dataBase, PlanManager &planmanager){
 	//한달 Day 정보를 파일에 저장함
 	planmanager.saveMonthPlan();
-	// 현재 레서피 정보를 파일에 저장함 
 	dataBase.saveDataBase();
+}
+
+
+void Interface::loadDayData(PlanManager &planmanager){
+	FILE* datefptr;
+	datefptr = fopen("saveDayData.txt", "r");
+
+		char line[1024];
+		char* context = NULL;
+		while (fgets(line, 1024, datefptr) != NULL){
+			int count = 0;
+			int loadDate;
+			Day loadDay;
+			char* token = strtok_s(line, ",", &context);
+			loadDate = atoi(token);
+			while ((token = strtok_s(NULL, ",", &context)) != NULL){
+				count++;
+				if (count == 1){//아침메뉴
+					loadDay.setBreakFastName(token);
+				}
+				else if (count == 2){//점심메뉴
+					loadDay.setLunchName(token);
+				}
+				else if (count == 3){//저녁메뉴
+					loadDay.setDinnerName(token);
+				}
+				else if (count == 4){//아침 인원 수
+					loadDay.setBreakFastNumber(atoi(token));
+				}
+				else if (count == 5){//점심 인원 수
+					loadDay.setLunchNumber(atoi(token));
+				}
+				else if (count == 6){//저녁 인원 수
+					loadDay.setDinnerNumber(atoi(token));
+				}
+				else if (count >= 7){//당일 일정
+					char* linefeed;
+					if ((  linefeed = strstr(token, "\n")) != NULL) {
+						*linefeed = NULL;
+					}
+					loadDay.setTodayPlan(token);
+				}
+			}
+			planmanager.changeDay(loadDay, loadDate);
+		}
+		
+	std::fclose(datefptr);
+}
+
+
+void Interface::loadRecipeData(DataBase &dataBase){
+	FILE* recipeptr;
+	recipeptr = fopen("saveRecipeData.txt", "r");
+
+	char line[1024];
+	char* context = NULL;
+	while (fgets(line, 1024, recipeptr) != NULL){
+		Recipe saveRecipe;
+		vector<string> recipeString;	// 재료개수, 이름, 조리법
+		vector<string> ingreString;		// 재료이름, 재료량 
+		char* token = strtok_s(line, ",", &context);	//init pharse
+		recipeString.push_back(token);
+		while ((token = strtok_s(NULL, ",", &context)) != NULL){
+		
+			if (*token == '|') {
+				token = strtok(token, "|");
+				ingreString.push_back(token);
+				while ((token = strtok(NULL, "|")) != NULL && *token!='\n') {
+					ingreString.push_back(token);
+				}
+				break;
+			}
+
+			recipeString.push_back(token);
+		}
+		saveRecipe.setDishName(recipeString.at(1));
+		saveRecipe.setdishExplanation(recipeString.at(2));
+		for (int i = 0; i < atoi(recipeString.at(0).c_str()); i++) {
+			Ingredient tempIngre(ingreString.at(2 * i), atoi(ingreString.at((2 * i) + 1).c_str()));
+			saveRecipe.setFileIngredient(tempIngre);
+		}
+		dataBase.setRecipe(saveRecipe);
+	}
 }

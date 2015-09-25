@@ -19,7 +19,8 @@ private:
 
 public:
 	Day();
-	void showTodayData();      // 이 날의 (식사,일정을) 출력
+	Day(const Day &myday);
+	void showTodayData(int date);      // 이 날의 (식사,일정을) 출력
 
 	void setMealName(int time, string newName);	// 식사 수정 메소드
 	void editNumber(int time, int newNum);		// 인원수 수정 메소드
@@ -31,4 +32,11 @@ public:
 	string getMealName(int num);				// 식사이름 반환 
 	string* getAllPlan();						// 오늘 일정전체 반환
 
+	void setTodayPlan(string plan);
+	void setBreakFastName(string name);
+	void setLunchName(string name);
+	void setDinnerName(string name);
+	void setBreakFastNumber(int number);
+	void setLunchNumber(int number);
+	void setDinnerNumber(int number);
 };

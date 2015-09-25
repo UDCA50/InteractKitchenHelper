@@ -15,14 +15,29 @@ Day::Day() {
 
 }
 
-void Day::showTodayData() {
+
+Day::Day(const Day &myday) {
+	breakFastName = myday.breakFastName;
+	lunchName = myday.lunchName;
+	dinnerName = myday.dinnerName;
+	this->breakFastNumber = myday.breakFastNumber;
+	this->lunchNumber = myday.lunchNumber;
+	this->dinnerNumber = myday.dinnerNumber;
+	this->todayPlan = myday.todayPlan;
+}
+
+void Day::showTodayData(int date) {
 	int number;
-	int i;
+	int i=0;
 	//system("cls");
 	std::cout << "일정 : ";
+	
+	//std::cout << todayPlan.at(0);
+	
 	for (i = 0; i < todayPlan.size(); i++) {
 		std::cout << endl << i + 1 << "번째 일정 : " << todayPlan.at(i);
 	}
+	
 	std::cout << std::endl;
 	std::cout << "아침 메뉴 : " << breakFastName << std::endl;
 	std::cout << "점심 메뉴 : " << lunchName << std::endl;
@@ -92,4 +107,25 @@ string* Day::getAllPlan() {
 
 int Day::getPlanCount() {
 	return todayPlan.size();
+}
+void Day::setBreakFastName(string name){
+	breakFastName = name;
+}
+void Day::setLunchName(string name){
+	lunchName = name;
+}
+void Day::setDinnerName(string name){
+	dinnerName = name;
+}
+void Day::setBreakFastNumber(int number){
+	breakFastNumber = number;
+}
+void Day::setLunchNumber(int number){
+	lunchNumber = number;
+}
+void Day::setDinnerNumber(int number){
+	dinnerNumber = number;
+}
+void Day::setTodayPlan(string plan){
+	todayPlan.push_back(plan);
 }
