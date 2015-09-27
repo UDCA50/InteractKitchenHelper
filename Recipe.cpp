@@ -10,6 +10,7 @@
 Recipe::Recipe(string name)
 {
 	this->dishName = name;
+	this->dishExplanation = "None";
 }
 
 Recipe::Recipe(){
@@ -65,8 +66,8 @@ void Recipe::deleteIngredient(int ingredientNumber)
 
 void Recipe::showIngredient(int ingredientNumber)
 {
-	cout << "재료명 : " << ingredient[ingredientNumber].getIngredientName() << endl;
-	cout << "재료량 : " << ingredient[ingredientNumber].getAmount() << endl;
+	cout << "\t Ingredient Name : " << ingredient[ingredientNumber].getIngredientName() << endl;
+	cout << "\t Ingredient Amount : " << ingredient[ingredientNumber].getAmount() << endl;
 }
 
 //public영역 method
@@ -105,18 +106,25 @@ void Recipe::setdishExplanation(string dishExplanation)
 void Recipe::modifyIngredient(int ingredientNumber)
 {
 	int modifyChoice=0;
-	std::cout << "\t========================"<<this->getIngredientName(ingredientNumber)
-	<<"=====================" << std::endl;
-	//★checkPoint
-	cout << "1. 재료명 수정\n2.재료량 수정\n3.이 재료 삭제\n0.메인메뉴로..." << endl;
-	cout << "선택 >> ";
+	system("cls");
+	cout << "\t========================"
+		<<this->getIngredientName(ingredientNumber)
+		<<"=====================" << std::endl;
+
+	cout << "\t1. modify Ingredient Name\t\t2.modify Ingredient Amount" << endl;
+	cout << "\t3. delete this Ingredient \t\t0.go Back to Main Menu" << endl;
+	cout << "\t========================"
+		<< this->getIngredientName(ingredientNumber)
+		<< "=====================" << std::endl;
+
+	cout << "\tSelect Option >> ";
 	cin >> modifyChoice;
 
 	switch (modifyChoice)
 	{
 	case 1:
 	{	string modifyName;
-	cout << "변경할 재료명을 입력하세요. >>";
+	cout << "\t Input New Ingredient Name>>";
 	cin >> modifyName;
 	setIngredientName(modifyName, ingredientNumber);
 	break;
@@ -124,7 +132,7 @@ void Recipe::modifyIngredient(int ingredientNumber)
 	case 2:
 	{
 		int modifyAmount;
-		cout << "변경할 재료량을 입력하세요. >>";
+		cout << "\t Input New Ingredient Amount>>";
 		cin >> modifyAmount;
 		setIngredientAmount(modifyAmount, ingredientNumber);
 		break;
@@ -140,7 +148,7 @@ void Recipe::modifyIngredient(int ingredientNumber)
 	{
 
 
-		cout << "잘못된 경로입니다." << endl;
+		cout << "Wrong Number !." << endl;
 		break;
 	}
 	}
@@ -149,17 +157,24 @@ void Recipe::modifyIngredient(int ingredientNumber)
 
 void Recipe::showAllRecipeInformation()
 {
-	cout << "요리명 : " << dishName << endl;
-	cout << "*******재료*******" << endl;
-	for (int i = 0; i < ingredient.size(); i++)
+
+	system("cls");
+	cout << "\t========================"
+		<< dishName
+		<< "=====================" << std::endl;
+	cout << "\t Ingredient :" << endl;
+	for (int i = 0; i < ingredient.size(); i++) {
 		showIngredient(i);
-	cout << "******************" << endl;
-	cout << "조리법 : " << dishExplanation;
+	}
+	cout << "Cook Procedure : " << dishExplanation;
+	cout << "\t========================"
+		<< dishName
+		<< "=====================" << std::endl;
+	
 }
 
 void Recipe::showAllIngredient()
 {
-	system("cls");
 	cout << "\t======================== Ingredient List ====================" << endl;
 	for (int i = 0; i < ingredient.size(); i++)
 	{

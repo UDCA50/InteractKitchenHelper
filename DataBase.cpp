@@ -72,7 +72,6 @@ void DataBase::researchIngredient(vector<Recipe> tRecipe)
 	showAllRecipeList(tempRecipeList);
 	cout << endl;
 }
-//여기까지 수정함
 
 int DataBase::findRecipeNumber(string recipeName)
 {
@@ -91,20 +90,24 @@ void DataBase::addRecipe()
 {
 	string recipeName;
 	int checkLoop=2;
-
-	cout << "<<레시피 추가를 시작합니다>>" << endl;
-	cout << "레시피명을 입력하세요. >> ";
+	
+	system("cls");
+	cout << "\t======================== add Recipe =====================" << endl;
+	cout << "\tInput Recipe Name >> ";
 	cin >> recipeName;
 	cin.clear();
 	cin.ignore(10000, '\n');
-	//getline(cin, recipeName);
 	recipeList.push_back(Recipe(recipeName));
 
 	while (1)
 	{
-		cout << "재료를 추가하시겠습니까? " << endl;
-		cout << "1.재료추가  2.다음단계로 . 3.메인메뉴로..." << endl;
-		cout << "선택 >> ";
+		cout << endl;
+		cout << endl;
+		cout << "\t======================== Ingredient Add Step =====================" << endl;
+		cout << "\t 1. add Ingredient \t\t 2. Goto Next Step " << endl;
+		cout << "\t 3. Skip all Step" << endl;
+		cout << "\t======================== Ingredient Add Step =====================" << endl;
+		cout << "\tSelect option >> ";
 		cin >> checkLoop;
 		cin.clear();
 		cin.ignore(10000, '\n');
@@ -117,39 +120,44 @@ void DataBase::addRecipe()
 		{
 			string ingredientName;
 			int ingredientAmount;
-			cout << "재료명을 입력하세요 >> ";
+			cout << "\tInput Ingredient Name >> ";
 			cin >> ingredientName;
 			cin.clear();
 			cin.ignore(10000, '\n');
-			cout << "재료량을 입력하세요 >> ";
+
+			cout << "\tInput Ingredient Amount >> ";
 			cin >> ingredientAmount;
 			cin.clear();
 			cin.ignore(10000, '\n');
 			recipeList[recipeList.size() - 1].addIngredient(ingredientName, ingredientAmount);
-			cout << "***추가된 재료목록***" << endl;
-			recipeList[recipeList.size() - 1].showAllIngredient();
-			cout << "******************" << endl;
-		} 
 
+			cout << "\t======================== Ingredient List =====================" << endl;
+			recipeList[recipeList.size() - 1].showAllIngredient();
+			cout << "\t======================== Ingredient List =====================" << endl;
+		}
 
 	}
-	cout << "조리법을 추가하시겠습니까? " << endl;
-	cout << "1.추가 2.메인 메뉴로..." << endl;
-	cout << "선택 >> ";
+
+
+	system("cls");
+	cout << "\t======================== Procedure Write Step =====================" << endl;
+	cout << "\t1.Add procedure\t\t2.Skip Procedure" << endl;
+	cout << "\t======================== Procedure Write Step =====================" << endl;
+
+
+	cout << "Select Option >> ";
 	cin >> checkLoop;
 	cin.clear();
 	cin.ignore(10000, '\n');
 
-
 	if (checkLoop == 1) {
 		string dishExplanation;
-		cout << "조리법을 입력하세요 >> ";
+		cout << "Write Cook Procedure >> ";
 		cin >> dishExplanation;
 		cin.clear();
 		cin.ignore(10000, '\n');
 		recipeList[recipeList.size() - 1].setdishExplanation(dishExplanation);
 	}
-	
 	return;
 }
 
@@ -216,7 +224,7 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 	case 3:
 	{
 		string dishExplanation;
-		cout << "변경할 조리법을 입력하세요. >> ";
+		cout << "\t Write New Cook Procedure>> ";
 		cin >> dishExplanation;
 		for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++)
 		{
@@ -233,7 +241,7 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 
 	default:
 	{
-		cout << "잘못된 경로입니다..." << endl;
+		cout << "Wrong Input!" << endl;
 		break;
 	}
 	}
@@ -273,7 +281,7 @@ void DataBase::searchRecipe()
 	}
 	default:
 	{
-		cout << "잘못된 경로입니다..." << endl;
+		cout << "Wrong Input!" << endl;
 		break;
 	}
 	}
@@ -369,10 +377,12 @@ void DataBase::searchRecipebyIngre()
 void DataBase::deleteRecipe()
 {
 	int choice;
-	cout << "****레시피 삭제****" << endl;
+	cout << endl;
+	cout << endl;
+	cout << "\t======================== Delete Recipe =====================" << endl;
 	showAllRecipeList(recipeList);
-	cout << "삭제하실 레시피를 선택하세요 (0: 메인메뉴로...)";
-	cout << " 선택 >> ";
+	cout << "\t======================== Delete Recipe =====================" << endl;
+	cout << "Select Recipe(0 : MainMenu) >>";
 	cin >> choice;
 	if (choice == 0)
 		return;
@@ -392,7 +402,7 @@ void DataBase::selectOneRecipe(vector<Recipe> tRecipe)
 {
 	int choice;
 	
-	cout << "선택 >> ";
+	cout << "\t Select >> ";
 	cin >> choice;
 
 	showRecipeOfDish(tRecipe[choice-1].getDishName());
@@ -405,27 +415,29 @@ void DataBase::showRecipeOfDish(string dishName)
 	recipeNum = findRecipeNumber(dishName);
 
 	if (recipeNum == -1)
-		cout << "***요청한 요리명이 없습니다 " << endl << endl;
+		cout << "\t No Such Recipe Name" << endl << endl;
 
-	cout << "요리명 : " << recipeList[recipeNum].getDishName() << endl;
+	cout << "Name : " << recipeList[recipeNum].getDishName() << endl;
 	recipeList[recipeNum].showAllIngredient();
-	cout << "조리법 : " << recipeList[recipeNum].getRecipeOfDish() << endl << endl;
+	cout << "Procedure : " << recipeList[recipeNum].getRecipeOfDish() << endl << endl;
 
 }
 void DataBase::showAllRecipeList()
 {
-
-	for (unsigned int recipIter = 0; recipIter < recipeList.size();recipIter++)
-		cout << (recipIter + 1) << ". : " << recipeList[recipIter].getDishName() << endl;
+	system("cls");
+	cout << "\t======================== Recipe List =====================" << endl;
+	for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++){
+		cout << "\t" << (recipIter + 1) << ". : " << recipeList[recipIter].getDishName() << endl;
+	}
+	cout << "\t======================== Recipe List =====================" << endl;
 
 	int choice;
 
 	cout << endl;
-	cout << "*********************" << endl;
-	cout << "1.특정 레시피 보기 " << endl;
-	cout << "2. 메인 메뉴로 ..." << endl;
-	cout << "*********************" << endl;
-	cout << " 선택 >> ";
+	cout << "\t======================== Select Option =====================" << endl;
+	cout << "\t1.Show Recipe Specification\t\t2. go to MainMenu" << endl;
+	cout << "\t======================== Select Option =====================" << endl;
+	cout << "\tSelect Option>> ";
 	cin >> choice;
 	if (choice == 1) selectOneRecipe(recipeList);
 	else return;
@@ -449,11 +461,11 @@ string DataBase::selectOneRecipeName() //요리 이름 반환method
 	int getNum = 0;
 	showAllRecipeList();
 	for (;;) {
-		cout << "Menu 선택 >> ";
+		cout << "\t Select Menu>> ";
 		cin >> getNum;
 		if (getNum == -1)
 		{
-			cout << "잘못된 입력입니다.";
+			cout << "\tWrong Input!" << endl;
 		}
 		else
 		{

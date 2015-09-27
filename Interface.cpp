@@ -80,22 +80,30 @@ void Interface::showFrontMenu() {
 void Interface::showDayPlan() {
 
 	int date, menunum = 0;
-	std::cout << "확인할 날짜를 입력하세요(1~30) : ";
+	system("cls");
+	std::cout << "\t======================== Show Daily Plan =====================" << std::endl;
+	std::cout << "\tInput the Day Number you want to Check(1~30) : ";
 	std::cin >> date;
 
 	while (date<1 || date>30) {
-		cout << "날짜를 잘못입력하셨습니다. 확인할 날짜를 입력하세요 : ";
+		cout << "\tWrong Input Try again !: ";
 		std::cin >> date;
+		cin.clear();
+		cin.ignore(10000, '\n');
 	}
 
 	std::cout << std::endl;
 
-	std::cout << date << "일 ";
 	planmanager.showDailyPlan(date);
 
 	while (menunum != 4) {
-		std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" << std::endl << "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기 " << std::endl << "해당하는 숫자를 입력하세요 : ";
+		std::cout << "\t======================== Select Sub Option =====================" << std::endl;
+		std::cout << "\t 1.See BreakFast Detail\t\t 2.See Lunch Detail" << endl 
+				<< "\t3.See Dinner Detail\t\t4.Back To Main Menu " << endl 
+				<< "Select Option : ";
 		std::cin >> menunum;
+		cin.clear();
+		cin.ignore(10000, '\n');
 
 		std::cout << std::endl;
 
@@ -108,9 +116,14 @@ void Interface::showDayPlan() {
 					showFrontMenu();
 				}
 				else {
-					std::cout << "숫자를 잘못입력하셨습니다." << std::endl;
-					std::cout << "1.아침메뉴 상세보기  2.점심메뉴 상세보기" << std::endl << "3.저녁메뉴 상세보기 4.상위메뉴로 돌아가기" << std::endl << "해당하는 숫자를 입력하세요 : ";
+					cout << "\tWrong Input Try again !: ";
+					std::cout << "\t======================== Select Sub Option =====================" << std::endl;
+					std::cout << "\t 1.See BreakFast Detail\t\t 2.See Lunch Detail" << endl
+						<< "\t3.See Dinner Detail\t\t4.Back To Main Menu " << endl
+						<< "Select Option : ";					
 					std::cin >> menunum;
+					cin.clear();
+					cin.ignore(10000, '\n');
 					std::cout << std::endl;
 				}
 
@@ -169,13 +182,15 @@ void Interface::editDayPlan()
 					/* 1. 날짜 입력 */
 	while (1)
 	{
-		cout << "<< 일정/식단 수정 >>" << endl << "날짜를 입력하세요(1 ~ 31) : ";
+		system("cls");
+		std::cout << "\t======================== Modify Daily Plan =====================" << std::endl;
+		std::cout << "\tInput the Day Number you want to Check(1~30) : ";
 		cin >> day;
 
 		if (1 <= day && day <= 31)
 			break;
 		else
-			cout << "1에서 31 사이의 수만 입력하세요" << endl;
+			cout << "\tWrong Input Try again !: ";
 	}
 	myDay = planmanager.getOneDay(day);
 	myDay.showTodayData(day);
@@ -184,13 +199,11 @@ void Interface::editDayPlan()
 	/* 2. 메뉴 */
 	while (1)
 	{
-		cout << endl << "1. 아침메뉴 수정하기" << endl
-			<< "2. 점심메뉴 수정하기" << endl
-			<< "3. 저녁메뉴 수정하기" << endl
-			<< "4. 일정추가하기" << endl
-			<< "5. 일정삭제하기" << endl
-			<< "6. 상위메뉴로" << endl
-			<< "Input : ";
+		std::cout << "\t======================== Select Option =====================" << std::endl;
+		cout << endl << "\t1. Modify BreakFast Meal\t\t" << "2. Modify Lunch Meal" << endl
+			<< "\t3. Modify Dinner Meal\t\t" << "4. Add ScheDule" << endl
+			<< "\t5. Delete ScheDule\t\t" << "6. go Back to Main Menu" << endl
+			<< "Select Option : ";
 
 		fflush(stdin);
 		cin >> menu;
@@ -198,11 +211,11 @@ void Interface::editDayPlan()
 		/* 메뉴수정파트 */
 		if (menu == 1 || menu == 2 || menu == 3)
 		{
-			cout << endl << " 1 > 메뉴명 수정" << endl;
+			cout << endl << "\t 1> Change Menu :" << endl;
 			newMenu = dataBase.selectOneRecipeName();
 			myDay.setMealName(menu, newMenu);
 
-			cout << endl << " 2 > 식사인원 수정 : ";
+			cout << endl << "\t 2> Change Number of People : ";
 			cin >> newNumber;
 			myDay.editNumber(menu, newNumber);
 		}
@@ -210,8 +223,9 @@ void Interface::editDayPlan()
 		/* 일정수정파트 */
 		else if (menu == 4)
 		{
-			cout << endl << " > 일정추가" << endl;
+			cout << endl << "\t 3> Add Today Schedule " << endl;
 			fflush(stdin);
+			cout << " > ";
 			std::getline(std::cin, newPlan);
 			myDay.addPlan(newPlan);
 		}
@@ -227,7 +241,7 @@ void Interface::editDayPlan()
 		}
 		else
 		{
-			cout << "잘못된 입력입니다" << endl;
+			cout << "Wrong Input " << endl;
 		}
 
 		planmanager.changeDay(myDay, day);

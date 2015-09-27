@@ -28,19 +28,23 @@ Day::Day(const Day &myday) {
 }
 
 void Day::showTodayData(int date) {
-	//system("cls");
-	std::cout << "일정 : ";
-	
-	//std::cout << todayPlan.at(0);
-	
+	system("cls");
+	std::cout << "\t========================"
+		<< date << " - Day"
+			<<"=====================" << std::endl;
+
+	std::cout << "\tToday Plan : " << endl;
 	for (unsigned int planIter = 0; planIter < todayPlan.size(); planIter++) {
-		std::cout << endl << planIter + 1 << "번째 일정 : " << todayPlan.at(planIter);
+		std::cout << planIter + 1 << ". Plan : " << endl;
+		std::cout << todayPlan.at(planIter) << endl;
 	}
 	
 	std::cout << std::endl;
-	std::cout << "아침 메뉴 : " << breakFastName << std::endl;
-	std::cout << "점심 메뉴 : " << lunchName << std::endl;
-	std::cout << "저녁 메뉴 : " << dinnerName << std::endl;
+	std::cout << std::endl;
+	std::cout << "\tToday Meal Plan : " << endl;
+	std::cout << "\tBreakFast : " << breakFastName << std::endl;
+	std::cout << "\tLunch : " << lunchName << std::endl;
+	std::cout << "\tDinner : " << dinnerName << std::endl;
 
 }
 void Day::setMealName(int time, string newName)
