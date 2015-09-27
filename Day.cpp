@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #pragma once
 #include"Day.h"
 #include<iostream>
@@ -27,15 +28,13 @@ Day::Day(const Day &myday) {
 }
 
 void Day::showTodayData(int date) {
-	int number;
-	int i=0;
 	//system("cls");
 	std::cout << "일정 : ";
 	
 	//std::cout << todayPlan.at(0);
 	
-	for (i = 0; i < todayPlan.size(); i++) {
-		std::cout << endl << i + 1 << "번째 일정 : " << todayPlan.at(i);
+	for (unsigned int planIter = 0; planIter < todayPlan.size(); planIter++) {
+		std::cout << endl << planIter + 1 << "번째 일정 : " << todayPlan.at(planIter);
 	}
 	
 	std::cout << std::endl;
@@ -83,6 +82,8 @@ string Day::getMealName(int num)
 		return lunchName;
 	else if (num == 3)
 		return dinnerName;
+
+	return NULL;
 }
 
 int Day::getMealNumber(int num)
@@ -93,14 +94,16 @@ int Day::getMealNumber(int num)
 		return lunchNumber;
 	else if (num == 3)
 		return dinnerNumber;
+
+	return -1;
 }
 
 string* Day::getAllPlan() {
 	string* charSet = new string[todayPlan.size()];
 
-	for (int i = 0; i < todayPlan.size(); i++) {
+	for (unsigned int planIter = 0; planIter < todayPlan.size(); planIter++) {
 
-		charSet[i] = todayPlan.at(i);
+		charSet[planIter] = todayPlan.at(planIter);
 	}
 	return charSet;
 }

@@ -32,6 +32,8 @@ public:
 	string getMealName(int num);				// 식사이름 반환 
 	string* getAllPlan();						// 오늘 일정전체 반환
 
+
+	//memberVar setter
 	void setTodayPlan(string plan);
 	void setBreakFastName(string name);
 	void setLunchName(string name);

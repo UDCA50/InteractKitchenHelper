@@ -11,14 +11,16 @@ using namespace std;
 class Ingredient{
 
 private:
-	string ingredientName;					//재료명
-	int amount;								//재료량
+	string ingredientName;					
+	int amount;								
 public:
 	Ingredient(string name, int amount);			
 	Ingredient();
+
 	//getter
 	string getIngredientName();				
 	int getAmount();					
+
 	//setter
 	void setName(string name);							
 	void setAmount(int amount);					

@@ -105,6 +105,9 @@ void Recipe::setdishExplanation(string dishExplanation)
 void Recipe::modifyIngredient(int ingredientNumber)
 {
 	int modifyChoice=0;
+	std::cout << "\t========================"<<this->getIngredientName(ingredientNumber)
+	<<"=====================" << std::endl;
+	//★checkPoint
 	cout << "1. 재료명 수정\n2.재료량 수정\n3.이 재료 삭제\n0.메인메뉴로..." << endl;
 	cout << "선택 >> ";
 	cin >> modifyChoice;
@@ -156,11 +159,12 @@ void Recipe::showAllRecipeInformation()
 
 void Recipe::showAllIngredient()
 {
-	
+	system("cls");
+	cout << "\t======================== Ingredient List ====================" << endl;
 	for (int i = 0; i < ingredient.size(); i++)
 	{
-		cout << (i+1) << ". 재료명 : " << ingredient[i].getIngredientName() << endl;
-		cout << "   재료량 : " << ingredient[i].getAmount() << endl;
+		cout <<"\t" << (i+1) << ". Name : " << ingredient[i].getIngredientName() << endl;
+		cout <<"\t" << "   Amount : " << ingredient[i].getAmount() << "g"<< endl;
 	}
 
 }

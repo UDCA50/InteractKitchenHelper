@@ -1,11 +1,4 @@
-/*
-* Recipe Method 구현
-* Created by 신영현/남성준/최연호
-
-
-*  레서피 추가 ->
-*/
-
+#define _CRT_SECURE_NO_WARNINGS
 #pragma once
 #include"DataBase.h"
 
@@ -20,13 +13,10 @@ int DataBase::selectSearchOption()
 {
 	int check;
 	cout << endl;
-	cout << "*******메뉴선택*******" << endl;
-	cout << "1. 검색결과 내에서 재검색" << endl;
-	cout << "2. 특정 레시피 수정" << endl;
-	cout << "3. 레시피 상세보기" << endl;
-	cout << "4. 메인메뉴로 ..." << endl;
-	cout << "**********************" << endl;
-	cout << "선택 >> ";
+	cout << "\t======================== Select Sub-Option =====================" << endl;
+	cout << "\t1.Re-Search in Result \t 2.modify Reicpe" << endl;
+	cout << "\t3.See Recipe Detail \t 4.back to Main" << endl;
+	cout << "\tOption>> ";
 	cin >> check;
 	cout << endl;
 	cin.clear();
@@ -40,19 +30,19 @@ void DataBase::researchDish(vector<Recipe> tRecipe)
 
 	tempRecipeList.clear();	
 
-	cout << "검색할 요리명을 입력하세요. >> ";
+	cout << "\tRecipe Name ?>> ";
 	cin >> name;
-	//getline(cin, name);
-
-	for (int i = 0; i < tRecipe.size(); i++)
+	
+	for ( unsigned int recipIter = 0; recipIter < tRecipe.size(); recipIter++)
 	{
-		if (tRecipe[i].getDishName().find(name) != string::npos)
+		if (tRecipe[recipIter].getDishName().find(name) != string::npos)
 		{
-			tempRecipeList.push_back(tRecipe[i]);
+			tempRecipeList.push_back(tRecipe[recipIter]);
 		}
 	}
 
-	cout << "***검색결과***" << endl;
+	system("cls");
+	cout << "\t======================== Search Result =====================" << endl;
 	showAllRecipeList(tempRecipeList);
 	cout << endl;
 
@@ -63,34 +53,33 @@ void DataBase::researchIngredient(vector<Recipe> tRecipe)
 	
 	string ingredient;
 	tempRecipeList.clear();
-	cout << "검색할 재료명을 입력하세요 >>" << endl;
+	cout << "\tIngredient Name ? >> ";
 	cin >> ingredient;
 
-	for (int i = 0; i < tRecipe.size(); i++)
+	for (unsigned int recipIter = 0; recipIter < tRecipe.size(); recipIter++)
 	{
-		for (int j = 0; i < recipeList[i].getIngredient().size(); j++)
+		for (unsigned int ingreIter = 0; ingreIter < tRecipe[recipIter].getIngredient().size(); ingreIter++)
 		{
 
-			if (tRecipe[i].getIngredient()[j].getIngredientName().find(ingredient) != string::npos)
+			if (tRecipe[recipIter].getIngredient()[ingreIter].getIngredientName().find(ingredient) != string::npos)
 			{
-				tempRecipeList.push_back(recipeList[i]);
+				tempRecipeList.push_back(tRecipe[recipIter]);
 			}
 		}
 	}
 
-	cout << "***검색결과***" << endl;
+	cout << "\t======================== reSearch Result =====================" << endl;
 	showAllRecipeList(tempRecipeList);
 	cout << endl;
-
 }
+//여기까지 수정함
 
 int DataBase::findRecipeNumber(string recipeName)
 {
-	int i = 0;
 	int maxVectorNum = recipeList.size();
-	for (; i < maxVectorNum; i++) {
-		if (recipeList[i].getDishName().compare(recipeName) == 0) {
-			return i;
+	for ( int recipIter = 0 ; recipIter < maxVectorNum; recipIter++) {
+		if (recipeList[recipIter].getDishName().compare(recipeName) == 0) {
+			return recipIter;
 		}
 	}
 
@@ -173,20 +162,26 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 {
 	int choiceDish;
 	int choiceMenu;
-	cout << "****레시피 수정****" << endl;
+	system("cls");
+	std::cout << endl;
+	std::cout << endl;
+	std::cout << "\t========================modify Recipe=====================" << std::endl;
 	showAllRecipeList(recipes);
-	cout << "******************" << endl;
-	cout << "어느 레시피를 수정하시겠습니까? (0: 메인메뉴)" << endl;
-	cout << "선택 >> "; cin >> choiceDish;
+	cout << "\tSelect Recipe(0: back to Main)>> ";
+	cin >> choiceDish;
 
 	if (choiceDish == 0) {
 		tempRecipeList.clear();
 		return;
 	}
 
-	cout << "***" << choiceDish << ". " << recipes[choiceDish - 1].getDishName() << "***" << endl;   //ex) ***1. 밥***
-	cout << "1.요리명 수정   2.재료 수정   3.조리법 수정    0.메인 메뉴로..." << endl;
-	cout << "선택 >> ";
+	system("cls");
+	cout << "\t========================" << choiceDish << ". " << recipes[choiceDish - 1].getDishName() 
+		 << "========================" << endl;
+	//checkPoint ★
+	cout << "\t 1.change Recipe Name\t\t2.change Ingredient" << endl;
+	cout << "\t 3.change Introduction\t\t 0.Back to Main" << endl;
+	cout << "\tSelectOption >> ";
 	cin >> choiceMenu;
 
 	switch (choiceMenu)
@@ -194,24 +189,26 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 	case 1:
 	{
 		string name;
-		cout << "변경하실 요리명을 입력하세요 >> ";
+		cout << "\tInput New Name>> ";
 		cin >> name;
-		for (int i = 0; i < recipeList.size(); i++)
+		for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++)
 		{
-			if (recipes[choiceDish - 1].getDishName().compare(recipeList[i].getDishName()) == 0)
+			if (recipes[choiceDish - 1].getDishName().compare(recipeList[recipIter].getDishName()) == 0)
 			{
-				recipeList[i].setDishName(name);
+				recipeList[recipIter].setDishName(name);
 			}
 		}
-
-		cout << "요리명 변경이 완료되었습니다." << endl;
+		system("cls");
+		cout << endl;
+		cout << endl;
+		cout << "\t======================== change Complete ====================" << endl;
 		break;
 	}
 	case 2:
 	{
 		int choiceIngredient;
 		recipeList[choiceDish - 1].showAllIngredient();
-		cout << "몇 번째 재료를 수정하시겠시겠습니까? >> ";
+		cout << "\tSelect Ingredient Number >> ";
 		cin >> choiceIngredient;
 		recipeList[choiceDish - 1].modifyIngredient(choiceIngredient - 1);
 		break;
@@ -221,14 +218,13 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 		string dishExplanation;
 		cout << "변경할 조리법을 입력하세요. >> ";
 		cin >> dishExplanation;
-		for (int i = 0; i < recipeList.size(); i++)
+		for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++)
 		{
-			if (recipes[choiceDish - 1].getDishName().compare(recipeList[i].getDishName()) == 0)
+			if (recipes[choiceDish - 1].getDishName().compare(recipeList[recipIter].getDishName()) == 0)
 			{
-				recipeList[i].setdishExplanation(dishExplanation);
+				recipeList[recipIter].setdishExplanation(dishExplanation);
 			}
 		}
-
 		break;
 	}
 
@@ -245,12 +241,18 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //검색을 하다가 수정하기 �
 void DataBase::searchRecipe()
 {
 	int choice = 0;
-	cout << "1.요리명으로 검색    2.재료명으로 검색    0.메인 메뉴로..." << endl;
-	cout << "선택 >> ";
+	system("cls");
+	std::cout << endl;
+	std::cout << endl;
+	std::cout << "\t========================Seacrh Recipe=====================" << std::endl;
+	cout << "\t1. search by Name\t\t2.search by Ingredient" << endl;
+	std::cout << endl;
+	cout << "\t0.back to main menu" << endl;
+	std::cout << "\t========================Seacrh Recipe=====================" << std::endl;
+	cout << "\tSearch>> ";
 	cin >> choice;
 	cin.clear();
 	cin.ignore(10000, '\n');
-
 	switch (choice)
 	{
 	case 1:
@@ -282,18 +284,19 @@ void DataBase::searchRecipebyName()
 	int check = 1;
 	string name;
 
-	cout << "검색할 요리명을 입력하세요. >> ";
+	cout << "\tInput Recipe Name>> ";
 	cin >> name;
 
-	for (int i = 0; i < recipeList.size(); i++)
+	for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++)
 	{
-		if (recipeList[i].getDishName().find(name) != string::npos)
+		if (recipeList[recipIter].getDishName().find(name) != string::npos)
 		{
-			tempRecipeList.push_back(recipeList[i]);
+			tempRecipeList.push_back(recipeList[recipIter]);
 		}
 	}
 
-	cout << "***검색결과***" << endl;
+	system("cls");
+	cout << "\t======================== Search Result =====================" << endl;
 	showAllRecipeList(tempRecipeList);
 	cout << endl;
 
@@ -301,18 +304,18 @@ void DataBase::searchRecipebyName()
 	{
 		check = selectSearchOption();
 
-		if (check == 1)
-		{
+		if (check == 1){
 			researchDish(tempRecipeList);
-		} else if (check == 2)
-		{
+		} 
+		else if (check == 2){
 			modifyRecipe(tempRecipeList);
 			return;
-		} else if (check == 3) {
+		}
+		else if (check == 3) {
 			selectOneRecipe(tempRecipeList);
 			
-		} else if (check == 4)
-		{
+		} 
+		else if (check == 4){
 			tempRecipeList.clear();
 			return;
 		}
@@ -325,21 +328,22 @@ void DataBase::searchRecipebyIngre()
 	int check = 1;
 	string ingredient;
 
-	cout << "검색할 재료명을 입력하세요 >>" << endl;
+	cout << "\tInput Ingredient Name>> ";
 	cin >> ingredient;
 
-	for (int i = 0; i < recipeList.size(); i++)
+	for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++)
 	{
-		for (int j = 0; j < recipeList[i].getIngredient().size(); j++)
+		for (unsigned int ingreIter = 0; ingreIter < recipeList[recipIter].getIngredient().size(); ingreIter++)
 		{
-			if (recipeList[i].getIngredient()[j].getIngredientName().find(ingredient) != string::npos)
+			if (recipeList[recipIter].getIngredient()[ingreIter].getIngredientName().find(ingredient) != string::npos)
 			{
-				tempRecipeList.push_back(recipeList[i]);
+				tempRecipeList.push_back(recipeList[recipIter]);
 			}
 		}
+	
 	}
-
-	cout << "***검색결과***" << endl;
+	system("cls");
+	cout << "\t======================== Search Result =====================" << endl;
 	showAllRecipeList(tempRecipeList);
 	cout << endl;
 	while (check)
@@ -411,8 +415,8 @@ void DataBase::showRecipeOfDish(string dishName)
 void DataBase::showAllRecipeList()
 {
 
-	for (int i = 0; i < recipeList.size();i++)
-		cout << (i + 1) << ". : " << recipeList[i].getDishName() << endl;
+	for (unsigned int recipIter = 0; recipIter < recipeList.size();recipIter++)
+		cout << (recipIter + 1) << ". : " << recipeList[recipIter].getDishName() << endl;
 
 	int choice;
 
@@ -429,8 +433,14 @@ void DataBase::showAllRecipeList()
 }
 void DataBase::showAllRecipeList(vector<Recipe> recipes)
 {
-	for (int i = 0; i < recipes.size(); i++)
-		cout << (i + 1) << ". : " << recipes[i].getDishName() << endl;
+	int recipeCount = 0;
+	for (unsigned int recipIter = 0; recipIter < recipes.size(); recipIter++){
+		cout << "\t" << (recipIter + 1) << ". : " << recipes[recipIter].getDishName() << endl;
+		recipeCount++;
+	}
+	if (recipeCount == 0) {
+		cout << "\t" << "NO Result" << endl;
+	}
 }
 
 string DataBase::selectOneRecipeName() //요리 이름 반환method
@@ -458,15 +468,15 @@ void DataBase::saveDataBase() {
 
 	FILE* recipefptr;
 	recipefptr = fopen("saveRecipeData.txt", "w");
-	for (int i = 0; i < recipeList.size(); i++) {
+	for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++) {
 
-		Recipe myRecipe = recipeList.at(i);
+		Recipe myRecipe = recipeList.at(recipIter);
 		fprintf(recipefptr, "%d,%s,%s,|", myRecipe.getIngredient().size(), myRecipe.getDishName().c_str(),
 			myRecipe.getRecipeOfDish().c_str());
 
-		for (int i = 0; i < myRecipe.getIngredient().size(); i++)  {
-			fprintf(recipefptr, "%s|%d|", myRecipe.getIngredient().at(i).getIngredientName().c_str(),
-				myRecipe.getIngredient().at(i).getAmount());
+		for (unsigned int ingreIter = 0; ingreIter < myRecipe.getIngredient().size(); ingreIter++)  {
+			fprintf(recipefptr, "%s|%d|", myRecipe.getIngredient().at(ingreIter).getIngredientName().c_str(),
+				myRecipe.getIngredient().at(ingreIter).getAmount());
 		}
 		fprintf(recipefptr, "\n");
 	}
@@ -474,4 +484,8 @@ void DataBase::saveDataBase() {
 }
 void DataBase::setRecipe(Recipe myrecipe) { // 09.24 추가함수 interface에서 레시피명 추가하기 위함
 	recipeList.push_back(myrecipe);
+}
+
+void DataBase::clearTempRecipe(){
+	this->tempRecipeList.clear();
 }

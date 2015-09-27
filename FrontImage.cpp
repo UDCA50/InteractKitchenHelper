@@ -4,7 +4,7 @@ using std::ofstream;
 
 void FrontImage::printImage(){
 
-	int garbageValue;
+	return;
 	string line;
 	ifstream inFile("frontimage.txt", ios::in);
 

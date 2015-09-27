@@ -12,37 +12,30 @@ Interface::Interface() {
 	showTodayInformation();
 }
 
-void Interface::printTitleMenu() {
-
-	string line;
-	ifstream inFile("Titlemenu.txt", ios::in);
-
-	if (inFile.is_open()) {
-		while (getline(inFile, line)) {
-			system("Color 78");
-			std::cout << line;
-		}
-		inFile.close();
-	}
-}
 
 void Interface::showFrontMenu() {
 
 	int userInput = 0;
-
-	std::cout << "=================IIKH System Menu =============" << std::endl;
-	std::cout << "1.레서피 검색 2.레서피 추가 3. 레서피 수정 " << std::endl;
-	std::cout << " 4.레서피 삭제 5. 모든 레시피 종류 보기" << std::endl;
-	std::cout << "6. 일정/식단 보기 7. 일정/식단 수정 8. 상태저장" << std::endl;
-	std::cout << "9. 프로그램 종료" << std::endl;
-	std::cout << "=================IIKH System Menu =============" << std::endl;
-	std::cout << "번호를 입력하세요 : ";
+	dataBase.clearTempRecipe();
+	std::cout << "\n\n";
+	std::cout << "\t========================IIKH System Menu=====================" << std::endl;
+	std::cout << "\t1.Search Recipe\t\t\t\t2.Add Recipe" << std::endl;
+	std::cout << endl;
+	std::cout << "\t3.Modify Recipe\t\t\t\t4.Delete Recipe" << std::endl;
+	std::cout << endl;
+	std::cout << "\t5.Show Recipe List\t\t\t6.Show DailyPlan" << std::endl;
+	std::cout << endl;
+	std::cout << "\t7.modify Plan\t\t\t\t8. Save Status" << std::endl;
+	std::cout << endl;
+	std::cout << "\t9. exit Program" << endl;
+	std::cout << "\t========================IIKH System Menu=====================" << std::endl;
+	std::cout << endl;
+	std::cout << endl;
+	std::cout << "\tSelect Number > ";
 
 	std::cin >> userInput;
 	cin.clear();
 	cin.ignore(10000, '\n');
-	std::cout << "your Input is " << userInput << std::endl;
-
 
 	switch (userInput)
 	{
@@ -269,7 +262,7 @@ void Interface::loadDayData(PlanManager &planmanager){
 		char* context = NULL;
 		while (fgets(line, 1024, datefptr) != NULL){
 			int count = 0;
-			int loadDate;
+			int loadDate=1;
 			Day loadDay;
 			char* token = strtok_s(line, ",", &context);
 			loadDate = atoi(token);
