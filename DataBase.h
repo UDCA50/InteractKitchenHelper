@@ -1,6 +1,10 @@
 #pragma once
 #include "Recipe.h"
 
+const int MAX_AMOUNT = 10000;
+const int PRINT_LIST_EXITOR = 101;
+const int MODIFY_EXITOR = 401;
+const int MAINMENU_EXITOR = 402;
 class DataBase{
 private:
 	vector<Recipe> recipeList;		// 여러 레서피 정보를 저장한 DB
@@ -30,7 +34,7 @@ public:
 
 	void selectOneRecipe(vector<Recipe> tRecipe);	//자세히 볼 레서피 1개 선택하기
 	void showRecipeOfDish(string dishName);			//특정 레서피 상세보기
-	void showAllRecipeList();						//레서피리스트 보기
+	int showAllRecipeList(int exitCondition);		//레서피리스트 보기
 	void showAllRecipeList(vector<Recipe> recipes);	//레서피리스트 보기(temp 리스트 안에서)
 
 	string selectOneRecipeName();				//하나의 레서피 선택해 이름반환

@@ -18,9 +18,7 @@ int DataBase::selectSearchOption()
 	cout << "\t3.See Recipe Detail \t 4.back to Main" << endl;
 	cout << "\tOption>> ";
 	cin >> check;
-	cout << endl;
-	cin.clear();
-	cin.ignore(10000, '\n');
+	checkNumberInput(check);
 	return check;
 }
 
@@ -32,7 +30,6 @@ void DataBase::researchDish(vector<Recipe> tRecipe)
 
 	cout << "\tRecipe Name ?>> ";
 	cin >> name;
-	
 	for ( unsigned int recipIter = 0; recipIter < tRecipe.size(); recipIter++)
 	{
 		if (tRecipe[recipIter].getDishName().find(name) != string::npos)
@@ -109,8 +106,7 @@ void DataBase::addRecipe()
 		cout << "\t======================== Ingredient Add Step =====================" << endl;
 		cout << "\tSelect option >> ";
 		cin >> checkLoop;
-		cin.clear();
-		cin.ignore(10000, '\n');
+		checkNumberInput(checkLoop);
 
 		if (checkLoop == 2)
 			break;
@@ -119,21 +115,24 @@ void DataBase::addRecipe()
 		else if(checkLoop==1)
 		{
 			string ingredientName;
-			int ingredientAmount;
+			int ingredientAmount=0;
 			cout << "\tInput Ingredient Name >> ";
 			cin >> ingredientName;
 			cin.clear();
 			cin.ignore(10000, '\n');
 
-			cout << "\tInput Ingredient Amount >> ";
-			cin >> ingredientAmount;
-			cin.clear();
-			cin.ignore(10000, '\n');
+
+
+			do{
+				cout << "\tInput correct Ingredient Amount >> ";
+				cin >> ingredientAmount;
+				checkNumberInput(ingredientAmount);
+			} while (!(ingredientAmount>0 && ingredientAmount< MAX_AMOUNT));
+			//ERRFIX_01 : ¹Ù¿î´õ¸®¼³Á¤À¸·Î À¯È¿ÇÑ Àç·á·®À» ³Ñ±âµµ·Ï ¼³Á¤
 			recipeList[recipeList.size() - 1].addIngredient(ingredientName, ingredientAmount);
 
-			cout << "\t======================== Ingredient List =====================" << endl;
+			system("cls");
 			recipeList[recipeList.size() - 1].showAllIngredient();
-			cout << "\t======================== Ingredient List =====================" << endl;
 		}
 
 	}
@@ -144,18 +143,15 @@ void DataBase::addRecipe()
 	cout << "\t1.Add procedure\t\t2.Skip Procedure" << endl;
 	cout << "\t======================== Procedure Write Step =====================" << endl;
 
-
 	cout << "Select Option >> ";
 	cin >> checkLoop;
-	cin.clear();
-	cin.ignore(10000, '\n');
+	checkNumberInput(checkLoop);
 
 	if (checkLoop == 1) {
 		string dishExplanation;
 		cout << "Write Cook Procedure >> ";
-		cin >> dishExplanation;
-		cin.clear();
-		cin.ignore(10000, '\n');
+		getline(std::cin, dishExplanation, '\n');
+		//ERRFIX_02 : cin À» getline À¸·Î ´ëÃ¼ , space ·Î ÀÔ·Â ¹ÞÀ» ¼ö ÀÖ°Ô º¯°æ
 		recipeList[recipeList.size() - 1].setdishExplanation(dishExplanation);
 	}
 	return;
@@ -177,7 +173,7 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //°Ë»öÀ» ÇÏ´Ù°¡ ¼öÁ¤ÇÏ±â Á
 	showAllRecipeList(recipes);
 	cout << "\tSelect Recipe(0: back to Main)>> ";
 	cin >> choiceDish;
-
+	checkNumberInput(choiceDish);
 	if (choiceDish == 0) {
 		tempRecipeList.clear();
 		return;
@@ -186,7 +182,7 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //°Ë»öÀ» ÇÏ´Ù°¡ ¼öÁ¤ÇÏ±â Á
 	system("cls");
 	cout << "\t========================" << choiceDish << ". " << recipes[choiceDish - 1].getDishName() 
 		 << "========================" << endl;
-	//checkPoint ¡Ú
+
 	cout << "\t 1.change Recipe Name\t\t2.change Ingredient" << endl;
 	cout << "\t 3.change Introduction\t\t 0.Back to Main" << endl;
 	cout << "\tSelectOption >> ";
@@ -218,6 +214,7 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //°Ë»öÀ» ÇÏ´Ù°¡ ¼öÁ¤ÇÏ±â Á
 		recipeList[choiceDish - 1].showAllIngredient();
 		cout << "\tSelect Ingredient Number >> ";
 		cin >> choiceIngredient;
+		checkNumberInput(choiceIngredient);
 		recipeList[choiceDish - 1].modifyIngredient(choiceIngredient - 1);
 		break;
 	}
@@ -225,7 +222,9 @@ void DataBase::modifyRecipe(vector<Recipe> recipes)   //°Ë»öÀ» ÇÏ´Ù°¡ ¼öÁ¤ÇÏ±â Á
 	{
 		string dishExplanation;
 		cout << "\t Write New Cook Procedure>> ";
-		cin >> dishExplanation;
+		getline(std::cin, dishExplanation, '\n');
+		//ERRFIX_02 : cin À» getline À¸·Î ´ëÃ¼ , space ·Î ÀÔ·Â ¹ÞÀ» ¼ö ÀÖ°Ô º¯°æ
+
 		for (unsigned int recipIter = 0; recipIter < recipeList.size(); recipIter++)
 		{
 			if (recipes[choiceDish - 1].getDishName().compare(recipeList[recipIter].getDishName()) == 0)
@@ -259,8 +258,7 @@ void DataBase::searchRecipe()
 	std::cout << "\t========================Seacrh Recipe=====================" << std::endl;
 	cout << "\tSearch>> ";
 	cin >> choice;
-	cin.clear();
-	cin.ignore(10000, '\n');
+	checkNumberInput(choice);
 	switch (choice)
 	{
 	case 1:
@@ -384,6 +382,7 @@ void DataBase::deleteRecipe()
 	cout << "\t======================== Delete Recipe =====================" << endl;
 	cout << "Select Recipe(0 : MainMenu) >>";
 	cin >> choice;
+	checkNumberInput(choice);
 	if (choice == 0)
 		return;
 	else deleteRecipe(choice);
@@ -404,6 +403,7 @@ void DataBase::selectOneRecipe(vector<Recipe> tRecipe)
 	
 	cout << "\t Select >> ";
 	cin >> choice;
+	checkNumberInput(choice);
 
 	showRecipeOfDish(tRecipe[choice-1].getDishName());
 	
@@ -422,7 +422,7 @@ void DataBase::showRecipeOfDish(string dishName)
 	cout << "Procedure : " << recipeList[recipeNum].getRecipeOfDish() << endl << endl;
 
 }
-void DataBase::showAllRecipeList()
+int DataBase::showAllRecipeList(int exitCondition)
 {
 	system("cls");
 	cout << "\t======================== Recipe List =====================" << endl;
@@ -430,6 +430,10 @@ void DataBase::showAllRecipeList()
 		cout << "\t" << (recipIter + 1) << ". : " << recipeList[recipIter].getDishName() << endl;
 	}
 	cout << "\t======================== Recipe List =====================" << endl;
+
+	if (exitCondition == MODIFY_EXITOR) {
+		return MODIFY_EXITOR;
+	}
 
 	int choice;
 
@@ -439,9 +443,10 @@ void DataBase::showAllRecipeList()
 	cout << "\t======================== Select Option =====================" << endl;
 	cout << "\tSelect Option>> ";
 	cin >> choice;
+	checkNumberInput(choice);
 	if (choice == 1) selectOneRecipe(recipeList);
-	else return;
-	
+	else return MAINMENU_EXITOR;
+	//ERRFIX_04 :  Å»Ãâ Á¶°ÇÀ» Àû¿ë
 }
 void DataBase::showAllRecipeList(vector<Recipe> recipes)
 {
@@ -459,10 +464,14 @@ string DataBase::selectOneRecipeName() //¿ä¸® ÀÌ¸§ ¹ÝÈ¯method
 {
 	string forChangeMenu;
 	int getNum = 0;
-	showAllRecipeList();
+	if (showAllRecipeList(MODIFY_EXITOR) == MAINMENU_EXITOR) {
+		return "ESCAPE";
+	}
+	
 	for (;;) {
-		cout << "\t Select Menu>> ";
+		cout << "\t Select New Menu >> ";
 		cin >> getNum;
+		checkNumberInput(getNum);
 		if (getNum == -1)
 		{
 			cout << "\tWrong Input!" << endl;

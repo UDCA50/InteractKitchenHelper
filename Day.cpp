@@ -42,9 +42,12 @@ void Day::showTodayData(int date) {
 	std::cout << std::endl;
 	std::cout << std::endl;
 	std::cout << "\tToday Meal Plan : " << endl;
-	std::cout << "\tBreakFast : " << breakFastName << std::endl;
-	std::cout << "\tLunch : " << lunchName << std::endl;
-	std::cout << "\tDinner : " << dinnerName << std::endl;
+	std::cout << "\tBreakFast : " << breakFastName  
+			<< "("<< this->breakFastNumber <<" people)"<<std::endl;
+	std::cout << "\tLunch : " << lunchName 
+			<< "(" << this->lunchNumber << " people)" << std::endl;
+	std::cout << "\tDinner : " << dinnerName 	
+			<< "(" << this->dinnerNumber << " people)" << std::endl;
 
 }
 void Day::setMealName(int time, string newName)

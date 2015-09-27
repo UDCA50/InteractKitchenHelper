@@ -36,3 +36,13 @@ void Ingredient::setAmount(int amount)
 }
 
 
+//ERRFIX_03: 숫자 유효성 체크
+int checkNumberInput(int &numberInput){
+
+	while (!(numberInput >= 0 && numberInput < 10000)){
+		cout << "\t Invaild Input Try again !: ";
+		std::cin >> numberInput;
+		checkNumberInput(numberInput);
+	}
+	return numberInput;
+}

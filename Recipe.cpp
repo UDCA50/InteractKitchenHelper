@@ -119,7 +119,7 @@ void Recipe::modifyIngredient(int ingredientNumber)
 
 	cout << "\tSelect Option >> ";
 	cin >> modifyChoice;
-
+	checkNumberInput(modifyChoice);
 	switch (modifyChoice)
 	{
 	case 1:
@@ -134,6 +134,7 @@ void Recipe::modifyIngredient(int ingredientNumber)
 		int modifyAmount;
 		cout << "\t Input New Ingredient Amount>>";
 		cin >> modifyAmount;
+		checkNumberInput(modifyAmount);
 		setIngredientAmount(modifyAmount, ingredientNumber);
 		break;
 	}

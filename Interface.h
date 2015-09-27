@@ -27,3 +27,4 @@ public:
 	void loadDayData(PlanManager &planmanager); // 일정정보를 파일에서 로드하는 매소드
 	void loadRecipeData(DataBase &dataBase);	//레서피정보를 파일에서 로드하는 메소드
 };
+

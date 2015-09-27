@@ -26,3 +26,5 @@ public:
 	void setAmount(int amount);					
 
 };
+
+int checkNumberInput(int &numberInput);

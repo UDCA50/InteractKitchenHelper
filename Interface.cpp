@@ -13,6 +13,8 @@ Interface::Interface() {
 }
 
 
+
+
 void Interface::showFrontMenu() {
 
 	int userInput = 0;
@@ -34,8 +36,7 @@ void Interface::showFrontMenu() {
 	std::cout << "\tSelect Number > ";
 
 	std::cin >> userInput;
-	cin.clear();
-	cin.ignore(10000, '\n');
+	checkNumberInput(userInput);
 
 	switch (userInput)
 	{
@@ -52,7 +53,7 @@ void Interface::showFrontMenu() {
 		dataBase.deleteRecipe();
 		break;
 	case 5:
-		dataBase.showAllRecipeList();
+		dataBase.showAllRecipeList(PRINT_LIST_EXITOR);
 		break;
 	case 6:
 		// 일정/식단 보기
@@ -84,12 +85,12 @@ void Interface::showDayPlan() {
 	std::cout << "\t======================== Show Daily Plan =====================" << std::endl;
 	std::cout << "\tInput the Day Number you want to Check(1~30) : ";
 	std::cin >> date;
+	checkNumberInput(date);
 
 	while (date<1 || date>30) {
 		cout << "\tWrong Input Try again !: ";
 		std::cin >> date;
-		cin.clear();
-		cin.ignore(10000, '\n');
+		checkNumberInput(date);
 	}
 
 	std::cout << std::endl;
@@ -104,6 +105,7 @@ void Interface::showDayPlan() {
 		std::cin >> menunum;
 		cin.clear();
 		cin.ignore(10000, '\n');
+		checkNumberInput(date);
 
 		std::cout << std::endl;
 
@@ -124,6 +126,7 @@ void Interface::showDayPlan() {
 					std::cin >> menunum;
 					cin.clear();
 					cin.ignore(10000, '\n');
+					checkNumberInput(date);
 					std::cout << std::endl;
 				}
 
@@ -186,6 +189,8 @@ void Interface::editDayPlan()
 		std::cout << "\t======================== Modify Daily Plan =====================" << std::endl;
 		std::cout << "\tInput the Day Number you want to Check(1~30) : ";
 		cin >> day;
+		checkNumberInput(day);
+
 
 		if (1 <= day && day <= 31)
 			break;
@@ -197,8 +202,7 @@ void Interface::editDayPlan()
 
 
 	/* 2. 메뉴 */
-	while (1)
-	{
+	
 		std::cout << "\t======================== Select Option =====================" << std::endl;
 		cout << endl << "\t1. Modify BreakFast Meal\t\t" << "2. Modify Lunch Meal" << endl
 			<< "\t3. Modify Dinner Meal\t\t" << "4. Add ScheDule" << endl
@@ -207,16 +211,20 @@ void Interface::editDayPlan()
 
 		fflush(stdin);
 		cin >> menu;
-
+		checkNumberInput(menu);
 		/* 메뉴수정파트 */
 		if (menu == 1 || menu == 2 || menu == 3)
 		{
 			cout << endl << "\t 1> Change Menu :" << endl;
 			newMenu = dataBase.selectOneRecipeName();
+			if (newMenu.compare("ESCAPE") == 0) {
+				return;
+			}
 			myDay.setMealName(menu, newMenu);
 
 			cout << endl << "\t 2> Change Number of People : ";
 			cin >> newNumber;
+			checkNumberInput(newNumber);
 			myDay.editNumber(menu, newNumber);
 		}
 
@@ -245,7 +253,8 @@ void Interface::editDayPlan()
 		}
 
 		planmanager.changeDay(myDay, day);
-	}
+
+	
 }
 
 void Interface::showTodayInformation() {
